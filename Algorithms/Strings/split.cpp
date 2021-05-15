@@ -2,7 +2,8 @@
 
 using namespace std;
 
-vector<string> split(const string& s, const string& d) {
+// Time: O(N); Space: O(N); 
+vector<string> split(const string& s, const string& d = " ") {
   vector<string> v;
 
   int i;
@@ -42,7 +43,8 @@ vector<string> split(const string& s, const string& d) {
   return v;
 }
 
-void split_to_container(const string& s, const string& d, vector<string>& v) {
+// Time: O(N); Space: O(N); 
+void split_to_container(vector<string>& v, const string& s, const string& d = " ") {
   int i;
   if (d.size() == 0) {
     int len = s.size();
@@ -114,7 +116,7 @@ void out_vector_string(vector<string>& v) {
 int main() {
   string s = inp_string();
 
-  vector<string> v; split_to_container(s, " ", v);
+  vector<string> v; split_to_container(v, s, " ");
 
   out_vector_string(v);
 

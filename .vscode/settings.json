@@ -68,5 +68,7 @@
         "shared_mutex": "cpp",
         "thread": "cpp",
         "typeindex": "cpp"
-    }
+    },
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500
 }

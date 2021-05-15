@@ -3,7 +3,7 @@
 using namespace std;
 
 void out_string(string& s) {  
-  cout << "Output String: " << s << "\n";
+  cout << "Output String: \"" << s << "\"\n";
 }
 
 void out_string_vector(vector<string>& v) {  
