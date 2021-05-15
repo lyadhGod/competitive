@@ -80,7 +80,7 @@ void split_to_container(vector<string>& v, const string& s, const string& d = " 
   }
 }
 
-string inp_string(bool with_space = true, bool wants_dummy = true) {
+string inp_string(const bool with_space = true, const bool wants_dummy = true) {
   string s;
 
   cout << "Input String: ";
@@ -102,7 +102,7 @@ string inp_string(bool with_space = true, bool wants_dummy = true) {
   return s;
 }
 
-void out_vector_string(vector<string>& v) {  
+void out_vector_string(const vector<string>& v) {  
   cout << "Output String Vector: [ ";
   if(v.size() > 0) {
       cout << "\"" << *v.begin() << "\"";

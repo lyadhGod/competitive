@@ -2,11 +2,11 @@
 
 using namespace std;
 
-void out_string(string& s) {  
+void out_string(const string& s) {  
   cout << "Output String: \"" << s << "\"\n";
 }
 
-void out_string_vector(vector<string>& v) {  
+void out_string_vector(const vector<string>& v) {  
   cout << "Output String Vector: [ ";
   if(v.size() > 0) {
       cout << "\"" << *v.begin() << "\"";
