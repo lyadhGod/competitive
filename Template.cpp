@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-using namespace std;
 #define FO(i, n) for(i = 0; i < n; i++)
 #define FOA(i, a, n) for(i = a; i < n; i++)
 #define FOK(i, n, k) for(i = 0; i < n; i += k)
@@ -59,6 +58,8 @@ using namespace std;
 #define PQCMP(t, cmp) priority_queue<t, vector<t>, cmp>
 #define GT(t) greater<t>()
 #define LT(t) less<t>()
+
+using namespace std;
 
 struct Debug {
     template<typename T> void var(string label, T &var) { 
