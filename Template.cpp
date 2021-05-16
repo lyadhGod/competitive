@@ -225,7 +225,7 @@ struct Debug {
         cout << "}\n\n";
     }
     template<typename T, typename P, typename Q> void graph_weighted(const string label, const unordered_map<T, const vector<std::pair<P, Q>>> &var) {
-        out << "\ndebugging >>> " << label << ": {\n";
+        cout << "\ndebugging >>> " << label << ": {\n";
         if(var.size() > 0) {
             auto starti = var.begin(), endi = var.end();
 
