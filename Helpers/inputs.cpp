@@ -2,11 +2,11 @@
 
 using namespace std;
 
-string inp_string(const bool with_space = true, const bool wants_dummy = true) {
+string inp_string(const bool with_space = true, const bool _dummy = true) {
   string s;
 
-  cout << "Input String: ";
-  if (!wants_dummy) {
+  cout << "input string: ";
+  if (!_dummy) {
     if (with_space) {
       getline(cin, s);
     } else {
@@ -24,27 +24,29 @@ string inp_string(const bool with_space = true, const bool wants_dummy = true) {
   return s;
 }
 
-unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = true) {
+unordered_map<int, vector<int>> inp_graph_unweighted(const bool _dummy = true) {
   unordered_map<int, vector<int>> graph;
 
-  if (!wants_dummy) {
-    cout << "Nodes count: ";
+  if (!_dummy) {
+    cout << "nodes count: ";
     int N;
     cin >> N;
 
     if (N > 0) {
-      cout << "\nNodes: [ 0";
-      for(int i = 1; i < N; i++) {
+      int i;
+
+      cout << "\nnodes: [ 0";
+      for(i = 1; i < N; i++) {
         cout << ", " << i;
       }
       cout << " ]\n\n";
 
-      cout << "Graph (\'->\' separated linked nodes):\n";
+      cout << "graph (\'->\' separated linked nodes):\n";
       string s;
       int j, count;
       size_t start, end;
       vector<string> v;
-      for (int i = 0; i < N; i++) {
+      for (i = 0; i < N; i++) {
         cout << "[" << i << "] -> ";
         getline(cin, s);
 
@@ -91,9 +93,9 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = tr
     graph[8] = vector<int>{ 3, 4 };
     graph[9] = vector<int>{ 6, 7 };
 
-    cout << "Nodes count: 10\n";
-    cout << "Nodes: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]\n";
-    cout << "Graph (\'->\' separated linked nodes): {\n";
+    cout << "nodes count: 10\n";
+    cout << "nodes: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]\n";
+    cout << "graph (\'->\' separated linked nodes): {\n";
     cout << "[0] -> 1 -> 4\n";
     cout << "[1] -> 0 -> 2\n";
     cout << "[2] -> 1 -> 4\n";

@@ -3,7 +3,7 @@
 using namespace std;
 
 // Time: O(N); Space: O(N);
-string l_trim(const string& s, const string& d = " ") {
+string l_trim(const string& s, const string& d = " ", const bool _debug = false) {
   size_t start = s.find_first_not_of(d);
 
   if (start == string::npos) {
@@ -11,11 +11,17 @@ string l_trim(const string& s, const string& d = " ") {
   }
 
   size_t last = s.size();
-  return s.substr(start, last - start);
+  string ans = s.substr(start, last - start);
+
+  if (_debug) {
+    cout << "l_trim(): \"" << ans << "\"\n";
+  }
+
+  return ans;
 }
 
 // Time: O(N); Space: O(N);
-string r_trim(const string& s, const string& d = " ") {
+string r_trim(const string& s, const string& d = " ", const bool _debug = false) {
   size_t last = s.find_last_not_of(d);
 
   if (last == string::npos) {
@@ -23,11 +29,17 @@ string r_trim(const string& s, const string& d = " ") {
   }
 
   size_t start = 0;
-  return s.substr(start, last - start + 1);
+  string ans = s.substr(start, last - start + 1);
+
+  if (_debug) {
+    cout << "r_trim(): \"" << ans << "\"\n";
+  }
+
+  return ans;
 }
 
 // Time: O(N); Space: O(N);
-string trim(const string& s, const string& d = " ") {
+string trim(const string& s, const string& d = " ", const bool _debug = false) {
   size_t start = s.find_first_not_of(d);
 
   if (start == string::npos) {
@@ -35,14 +47,20 @@ string trim(const string& s, const string& d = " ") {
   }
 
   size_t last = s.find_last_not_of(d);
-  return s.substr(start, last - start + 1);
+  string ans = s.substr(start, last - start + 1);
+
+  if (_debug) {
+    cout << "r_trim(): \"" << ans << "\"\n";
+  }
+
+  return ans;
 }
 
-string inp_string(const bool with_space = true, const bool wants_dummy = true) {
+string inp_string(const bool with_space = true, const bool _dummy = true) {
   string s;
 
   cout << "Input String: ";
-  if (!wants_dummy) {
+  if (!_dummy) {
     if (with_space) {
       getline(cin, s);
     } else {
@@ -60,16 +78,10 @@ string inp_string(const bool with_space = true, const bool wants_dummy = true) {
   return s;
 }
 
-void out_string(const string& s) {  
-  cout << "Output String: \"" << s << "\"\n";
-}
-
 int main() {
   string s = inp_string();
 
-  string str = trim(s);
-
-  out_string(str);
+  string str = trim(s, " ", true);
 
   return 0;
 }
