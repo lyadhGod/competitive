@@ -1,27 +1,68 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = true) {
+
+void dfs_traversal(const unordered_map<int, vector<int>>& graph, unordered_set<int>& visited, const int root, const bool _debug = false, const bool _init = true) {
+  if (_init) {
+    if (_debug) {
+      cout << "(";
+    }
+
+    dfs_traversal(graph, visited, root, _debug, false);
+
+    if (_debug) {
+      cout << ")";
+    }
+
+    return;
+  }
+  
+  if (_debug) {
+    cout << root;
+  }
+
+  visited.emplace(root);
+
+  vector<int> node_vector = graph.find(root)->second;
+  vector<int>::const_iterator start = node_vector.begin(), end = node_vector.end(), itr;
+  for (itr = start; itr != end; itr++) {
+    if (visited.find(*itr) == visited.end()) {
+      if (_debug) {
+        cout << "(";
+      }
+
+      dfs_traversal(graph, visited, *itr, _debug, false);
+
+      if (_debug) {
+        cout << ")";
+      }
+    }
+  }
+}
+
+unordered_map<int, vector<int>> inp_graph_unweighted(const bool _dummy = true) {
   unordered_map<int, vector<int>> graph;
 
-  if (!wants_dummy) {
-    cout << "Nodes count: ";
+  if (!_dummy) {
+    cout << "nodes count: ";
     int N;
     cin >> N;
 
     if (N > 0) {
-      cout << "\nNodes: [ 0";
-      for(int i = 1; i < N; i++) {
+      int i;
+
+      cout << "\nnodes: [ 0";
+      for(i = 1; i < N; i++) {
         cout << ", " << i;
       }
       cout << " ]\n\n";
 
-      cout << "Graph (\'->\' separated linked nodes):\n";
+      cout << "graph (\'->\' separated linked nodes):\n";
       string s;
       int j, count;
       size_t start, end;
       vector<string> v;
-      for (int i = 0; i < N; i++) {
+      for (i = 0; i < N; i++) {
         cout << "[" << i << "] -> ";
         getline(cin, s);
 
@@ -68,9 +109,9 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = tr
     graph[8] = vector<int>{ 3, 4 };
     graph[9] = vector<int>{ 6, 7 };
 
-    cout << "Nodes count: 10\n";
-    cout << "Nodes: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]\n";
-    cout << "Graph (\'->\' separated linked nodes): {\n";
+    cout << "nodes count: 10\n";
+    cout << "nodes: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]\n";
+    cout << "graph (\'->\' separated linked nodes): {\n";
     cout << "[0] -> 1 -> 4\n";
     cout << "[1] -> 0 -> 2\n";
     cout << "[2] -> 1 -> 4\n";
@@ -87,23 +128,11 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = tr
   return graph;
 }
 
-void dfs_traversal(const unordered_map<int, vector<int>>& graph, unordered_set<int>& visited, int root) {
-  visited.emplace(root);
-
-  auto node_vector = graph.find(root)->second;
-  auto start = node_vector.begin(), end = node_vector.end();
-  for (auto itr = start; itr != end; itr++) {
-    if (visited.find(*itr) == visited.end()) {
-      dfs_traversal(graph, visited, *itr);
-    }
-  }
-}
-
 int main() {
   unordered_map<int, vector<int>> graph = inp_graph_unweighted();
 
   unordered_set<int> visited;
-  dfs_traversal(graph, visited, 0);
+  dfs_traversal(graph, visited, 0, true);
   
   return 0;
 }
