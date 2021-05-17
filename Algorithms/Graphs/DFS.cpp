@@ -87,8 +87,23 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = tr
   return graph;
 }
 
+void dfs_traversal(const unordered_map<int, vector<int>>& graph, unordered_set<int>& visited, int root) {
+  visited.emplace(root);
+
+  auto node_vector = graph.find(root)->second;
+  auto start = node_vector.begin(), end = node_vector.end();
+  for (auto itr = start; itr != end; itr++) {
+    if (visited.find(*itr) == visited.end()) {
+      dfs_traversal(graph, visited, *itr);
+    }
+  }
+}
+
 int main() {
   unordered_map<int, vector<int>> graph = inp_graph_unweighted();
+
+  unordered_set<int> visited;
+  dfs_traversal(graph, visited, 0);
   
   return 0;
 }
