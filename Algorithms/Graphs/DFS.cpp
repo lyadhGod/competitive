@@ -1,7 +1,8 @@
 #include<bits/stdc++.h>
+
 using namespace std;
 
-
+// Time: O(V + E); Space: O(V);
 void dfs_traversal(const unordered_map<int, vector<int>>& graph, unordered_set<int>& visited, const int root, const bool _debug = false, const bool _init = true) {
   if (_init) {
     if (_debug) {
