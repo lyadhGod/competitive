@@ -51,10 +51,9 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = tr
             end = v[j].find_last_not_of(" ");
             v[j] = v[j].substr(start, end - start + 1);
           }
-
-          cout << "\"" << v[j] << "\"   ";
         }
-        cout << "\n";
+
+        graph[i].resize(count + 1);
       }
     }
   } else {
@@ -70,8 +69,8 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = tr
     graph[9] = vector<int>{ 6, 7 };
 
     cout << "Nodes count: 10\n";
-    cout << "\nNodes: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]\n\n";
-    cout << "Graph (\'->\' separated linked nodes):\n";
+    cout << "Nodes: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]\n";
+    cout << "Graph (\'->\' separated linked nodes): {\n";
     cout << "[0] -> 1 -> 4\n";
     cout << "[1] -> 0 -> 2\n";
     cout << "[2] -> 1 -> 4\n";
@@ -82,6 +81,7 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool wants_dummy = tr
     cout << "[7] -> 6 -> 9\n";
     cout << "[8] -> 3 -> 4\n";
     cout << "[9] -> 6 -> 7\n";
+    cout << "}\n";
   }
 
   return graph;
