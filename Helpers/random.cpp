@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bits/stdc++.h>
+#include "outputs.cpp"
 
 using namespace std;
 
@@ -10,7 +11,7 @@ int gen_random_int(const int min = -1000000007, const int max = 1000000007, cons
   int ans = distribution(engine);
 
   if (_debug) {
-    cout << "gen_random_int(): " << ans << "\n";
+    out_int(ans, "gen_random_int()");
   }
 
   return ans;
@@ -22,7 +23,7 @@ long gen_random_long(const long min = -1000000007L, const long max = 1000000007L
   long ans = distribution(engine);
 
   if (_debug) {
-    cout << "gen_random_long(): " << ans << "\n";
+    out_long(ans, "gen_random_long()");
   }
 
   return ans;
@@ -34,7 +35,7 @@ long long gen_random_long_long(const long long min = -1000000007LL, const long l
   long long ans = distribution(engine);
 
   if (_debug) {
-    cout << "gen_random_long_long(): " << ans << "\n";
+    out_long_long(ans, "gen_random_long_long()");
   }
 
   return ans;
@@ -46,7 +47,7 @@ double gen_random_double(const double min = -1000000007.0, const double max = 10
   double ans = distribution(engine);
 
   if (_debug) {
-    cout << "gen_random_double(): " << ans << "\n";
+    out_double(ans, "gen_random_double()");
   }
 
   return ans;
@@ -79,13 +80,13 @@ string gen_random_string(const int length = 10, const bool with_space = false, c
   }
 
   if (_debug) {
-    cout << "gen_random_string(): " << s << "\n";
+    out_string(s, "gen_random_string()");
   }
 
   return s;
 }
 
-unordered_map<int, vector<int>> gen_random_unweigthed_graph(const int length = 10, const bool has_forced_disconnection = false, const bool _debug = false) {
+unordered_map<int, vector<int>> gen_random_unweighted_graph(const int length = 10, const bool has_forced_disconnection = false, const bool _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> node_distribution(0, length - 1);
   uniform_int_distribution<int> connected_distribution(0, 1);
@@ -107,26 +108,13 @@ unordered_map<int, vector<int>> gen_random_unweigthed_graph(const int length = 1
   }
 
   if (_debug) {
-    cout << "gen_random_unweigthed_graph(): {\n";
-    
-    unordered_map<int, vector<int>>::iterator begin_i = graph.begin(), end_i = graph.end();
-    unordered_map<int, vector<int>>::iterator itr;
-    for (itr = begin_i; itr != end_i; itr++) {
-      cout << "    (" << itr->first << ")";
-
-      count = itr->second.size();
-      for (j = 0; j < count; j++) {
-        cout << " -> " << itr->second[j];
-      }
-
-      cout << "}\n";
-    }
+    out_unweighted_graph(graph, "gen_random_unweigthed_graph()");
   }
 
   return graph;
 }
 
-unordered_map<int, vector<pair<int, int>>> gen_random_weigthed_graph(const int length = 10, const int min_weight = 0, const int max_weight = 10, const bool has_forced_disconnection = false, const bool _debug = false) {
+unordered_map<int, vector<pair<int, int>>> gen_random_weighted_graph(const int length = 10, const int min_weight = 0, const int max_weight = 10, const bool has_forced_disconnection = false, const bool _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> node_distribution(0, length - 1);
   uniform_int_distribution<int> edge_distribution(min_weight, max_weight);
@@ -149,22 +137,7 @@ unordered_map<int, vector<pair<int, int>>> gen_random_weigthed_graph(const int l
   }
 
   if (_debug) {
-    cout << "gen_random_weigthed_graph(): {\n";
-    
-    unordered_map<int, vector<pair<int, int>>>::iterator begin_i = graph.begin(), end_i = graph.end();
-    unordered_map<int, vector<pair<int, int>>>::iterator itr;
-    for (itr = begin_i; itr != end_i; itr++) {
-      cout << "    (" << itr->first << ")";
-
-      count = itr->second.size();
-      for (j = 0; j < count; j++) {
-        cout << " -> [" << itr->second[j].first << ", " << itr->second[j].second << "]";
-      }
-
-      cout << "\n";
-    }
-
-    cout << "}\n";
+    out_weighted_graph(graph, "gen_random_weigthed_graph()");
   }
 
   return graph;

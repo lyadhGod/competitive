@@ -2,6 +2,7 @@
 
 #include <bits/stdc++.h>
 #include "random.cpp"
+#include "outputs.cpp"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ string inp_string(const bool with_space = false, const bool _dummy = true) {
     }
   } else {
     s = gen_random_string(10, with_space);
-    cout << s << "\n";
+    out_string(s);
   }
 
   return s;
@@ -81,7 +82,8 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const int length = 10, cons
       }
     }
   } else {
-    graph = gen_random_unweigthed_graph(length);
+    graph = gen_random_unweighted_graph(length);
+    out_unweighted_graph(graph);
   }
 
   return graph;
