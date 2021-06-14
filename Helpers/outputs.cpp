@@ -98,10 +98,48 @@ void out_vector_string(const vector<string>& value, const string& label = "") {
   }
   cout << "[ ";
 
-  vector<string>::const_iterator begin_i = value.begin(), end_i = value.end();
-  vector<string>::const_iterator itr;
-  for (itr = begin_i; itr != end_i; itr++) {
-    cout << "\"" << *itr << "\", ";
+  int i, length = value.size();
+  for (i = 0; i < length; i++) {
+    cout << "\"" << value[i] << "\", ";
+  }
+
+  cout << "]\n";
+}
+
+void out_matrix_int(const vector<vector<int>>& value, const string& label = "") {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[\n";
+
+  int length_i = value.size(), length_j;
+  if (length_i > 0) {
+    length_j = value[0].size();
+  }
+
+  int i, j;
+  for (i = 0; i < length_i; i++) {
+    cout << "    [ ";
+  
+    for (j = 0; j < length_j; j++) {
+      cout << value[i][j] << ", ";
+    }
+
+    cout << "]\n";
+  }
+
+  cout << "]\n";
+}
+
+void out_transtion_char_char(const vector<pair<char, char>>& value, const string& label = "") {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[\n";
+
+  int i, length = value.size();
+  for (i = 0; i < length; i++) {
+    cout << "    [" << value[i].first << "] -> [" << value[i].second << "]\n";
   }
 
   cout << "]\n";
