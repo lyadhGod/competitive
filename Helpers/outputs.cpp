@@ -139,7 +139,27 @@ void out_transtion_char_char(const vector<pair<char, char>>& value, const string
 
   int i, length = value.size();
   for (i = 0; i < length; i++) {
-    cout << "    [" << value[i].first << "] -> [" << value[i].second << "]\n";
+    cout << "    \'" << value[i].first << "\' -> \'" << value[i].second << "\'\n";
+  }
+
+  cout << "]\n";
+}
+
+void out_transtion_char_char_all(const vector<vector<pair<char, char>>>& value, const string& label = "") {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[\n";
+
+  int i, j, length_i = value.size(), length_j;;
+  for (i = 0; i < length_i; i++) {
+    cout << "    [ ";
+
+    for (j = 0; j < length_j; j++) {
+      cout << "\'" << value[i][j].first << "\' -> \'" << value[i][j].second << "\', ";
+    }
+
+    cout << "]\n";
   }
 
   cout << "]\n";
