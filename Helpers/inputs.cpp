@@ -23,7 +23,7 @@ string inp_string(const bool with_space = false, const bool _dummy = true) {
   return s;
 }
 
-unordered_map<int, vector<int>> inp_graph_unweighted(const bool _dummy = true) {
+unordered_map<int, vector<int>> inp_graph_unweighted(const int length = 10, const bool _dummy = true) {
   unordered_map<int, vector<int>> graph;
 
   if (!_dummy) {
@@ -46,7 +46,7 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool _dummy = true) {
       size_t start, end;
       vector<string> v;
       for (i = 0; i < N; i++) {
-        cout << "[" << i << "] -> ";
+        cout << "    (" << i << ") -> ";
         getline(cin, s);
 
         count = 0;
@@ -81,31 +81,7 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool _dummy = true) {
       }
     }
   } else {
-    graph[0] = vector<int>{ 1, 4 };
-    graph[1] = vector<int>{ 0, 2 };
-    graph[2] = vector<int>{ 1, 4 };
-    graph[3] = vector<int>{ 0, 2, 5 };
-    graph[4] = vector<int>{ 5 };
-    graph[5] = vector<int>{ 8 };
-    graph[6] = vector<int>{ 7, 9 };
-    graph[7] = vector<int>{ 6, 9 };
-    graph[8] = vector<int>{ 3, 4 };
-    graph[9] = vector<int>{ 6, 7 };
-
-    cout << "nodes count: 10\n";
-    cout << "nodes: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]\n";
-    cout << "graph (\'->\' separated linked nodes): {\n";
-    cout << "[0] -> 1 -> 4\n";
-    cout << "[1] -> 0 -> 2\n";
-    cout << "[2] -> 1 -> 4\n";
-    cout << "[3] -> 0 -> 2 -> 5\n";
-    cout << "[4] -> 5\n";
-    cout << "[5] -> 8\n";
-    cout << "[6] -> 7 -> 9\n";
-    cout << "[7] -> 6 -> 9\n";
-    cout << "[8] -> 3 -> 4\n";
-    cout << "[9] -> 6 -> 7\n";
-    cout << "}\n";
+    graph = gen_random_unweigthed_graph(length);
   }
 
   return graph;

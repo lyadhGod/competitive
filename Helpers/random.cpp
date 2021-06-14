@@ -85,4 +85,89 @@ string gen_random_string(const int length = 10, const bool with_space = false, c
   return s;
 }
 
+unordered_map<int, vector<int>> gen_random_unweigthed_graph(const int length = 10, const bool has_forced_disconnection = false, const bool _debug = false) {
+  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
+  uniform_int_distribution<int> node_distribution(0, length - 1);
+  uniform_int_distribution<int> connected_distribution(0, 1);
+
+  unordered_map<int, vector<int>> graph;
+
+  int i, j;
+  int count;
+  for (i = 0; i < length; i++) {
+    count = node_distribution(engine);
+
+    graph[i] = vector<int>(count);
+
+    if (!(has_forced_disconnection && connected_distribution(engine))) {
+      for (j = 0; j < count; j++) {
+        graph[i][j] = node_distribution(engine);
+      }
+    }
+  }
+
+  if (_debug) {
+    cout << "gen_random_unweigthed_graph(): {\n";
+    
+    unordered_map<int, vector<int>>::iterator begin_i = graph.begin(), end_i = graph.end();
+    unordered_map<int, vector<int>>::iterator itr;
+    for (itr = begin_i; itr != end_i; itr++) {
+      cout << "    (" << itr->first << ")";
+
+      count = itr->second.size();
+      for (j = 0; j < count; j++) {
+        cout << " -> " << itr->second[j];
+      }
+
+      cout << "}\n";
+    }
+  }
+
+  return graph;
+}
+
+unordered_map<int, vector<pair<int, int>>> gen_random_weigthed_graph(const int length = 10, const int min_weight = 0, const int max_weight = 10, const bool has_forced_disconnection = false, const bool _debug = false) {
+  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
+  uniform_int_distribution<int> node_distribution(0, length - 1);
+  uniform_int_distribution<int> edge_distribution(min_weight, max_weight);
+  uniform_int_distribution<int> connected_distribution(0, 1);
+
+  unordered_map<int, vector<pair<int, int>>> graph;
+
+  int i, j;
+  int count;
+  for (i = 0; i < length; i++) {
+    count = node_distribution(engine);
+
+    graph[i] = vector<pair<int, int>>(count);
+
+    if (!(has_forced_disconnection && connected_distribution(engine))) {
+      for (j = 0; j < count; j++) {
+        graph[i][j] = make_pair(node_distribution(engine), edge_distribution(engine));
+      }
+    }
+  }
+
+  if (_debug) {
+    cout << "gen_random_weigthed_graph(): {\n";
+    
+    unordered_map<int, vector<pair<int, int>>>::iterator begin_i = graph.begin(), end_i = graph.end();
+    unordered_map<int, vector<pair<int, int>>>::iterator itr;
+    for (itr = begin_i; itr != end_i; itr++) {
+      cout << "    (" << itr->first << ")";
+
+      count = itr->second.size();
+      for (j = 0; j < count; j++) {
+        cout << " -> [" << itr->second[j].first << ", " << itr->second[j].second << "]";
+      }
+
+      cout << "\n";
+    }
+
+    cout << "}\n";
+  }
+
+  return graph;
+}
+
 

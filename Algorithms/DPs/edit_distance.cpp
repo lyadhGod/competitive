@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-  inp_string();
+  gen_random_weigthed_graph(10, 0, 10, true, true);
 
   return 0;
 }
