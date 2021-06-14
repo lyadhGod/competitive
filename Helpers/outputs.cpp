@@ -32,11 +32,18 @@ void out_double(const double value, const string& label = "") {
   cout << value << "\n";
 }
 
+void out_char(const char value, const string& label = "") {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "\'" << value << "\"'\n";
+}
+
 void out_string(const string& value, const string& label = "") {
   if (label.size() > 0) {
     cout << label << ": ";
   }
-  cout << value << "\n";
+  cout << "\"" << value << "\"\n";
 }
 
 void out_unweighted_graph(const unordered_map<int, vector<int>>& value, const string& label = "") {
@@ -83,6 +90,21 @@ void out_weighted_graph(const unordered_map<int, vector<pair<int, int>>>& value,
   }
 
   cout << "}\n";
+}
+
+void out_vector_string(const vector<string>& value, const string& label = "") {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[ ";
+
+  vector<string>::const_iterator begin_i = value.begin(), end_i = value.end();
+  vector<string>::const_iterator itr;
+  for (itr = begin_i; itr != end_i; itr++) {
+    cout << "\"" << *itr << "\", ";
+  }
+
+  cout << "]\n";
 }
 
 

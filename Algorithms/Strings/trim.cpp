@@ -15,7 +15,7 @@ string l_trim(const string& s, const string& d = " ", const bool _debug = false)
   string ans = s.substr(start, last - start);
 
   if (_debug) {
-    cout << "l_trim(): \"" << ans << "\"\n";
+    out_string(ans, "l_trim()");
   }
 
   return ans;
@@ -33,7 +33,7 @@ string r_trim(const string& s, const string& d = " ", const bool _debug = false)
   string ans = s.substr(start, last - start + 1);
 
   if (_debug) {
-    cout << "r_trim(): \"" << ans << "\"\n";
+    out_string(ans, "r_trim()");
   }
 
   return ans;
@@ -51,7 +51,7 @@ string trim(const string& s, const string& d = " ", const bool _debug = false) {
   string ans = s.substr(start, last - start + 1);
 
   if (_debug) {
-    cout << "trim(): \"" << ans << "\"\n";
+    out_string(ans, "trim()");
   }
 
   return ans;
@@ -64,5 +64,3 @@ int main() {
 
   return 0;
 }
-
-

@@ -42,23 +42,16 @@ vector<string> split(const string& s, const string& d = " ", const bool _debug =
   }
 
   if (_debug) {
-    vector<string>::const_iterator start = v.begin(), end = v.end(), itr;
-    cout << "split(): [ ";
-    for(itr = start; itr != end; itr++) {
-      cout << "\"" << *itr << "\", "; 
-    }
-    cout << "]\n";
+    out_vector_string(v, "split()");
   }
 
   return v;
 }
 
 int main() {
-  string s = inp_string(true);
+  string s = inp_string();
 
   split(s, " ", true);
 
   return 0;
 }
-
-
