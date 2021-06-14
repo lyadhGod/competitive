@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include "../../Helpers/helpers.h"
 
 using namespace std;
 
@@ -54,28 +55,6 @@ string trim(const string& s, const string& d = " ", const bool _debug = false) {
   }
 
   return ans;
-}
-
-string inp_string(const bool with_space = true, const bool _dummy = true) {
-  string s;
-
-  cout << "Input String: ";
-  if (!_dummy) {
-    if (with_space) {
-      getline(cin, s);
-    } else {
-      cin >> s;
-    }
-  } else {
-    if (with_space) {
-      s = "  Black Lives Matter  ";
-    } else {
-      s = "  Black  ";
-    }
-    cout << s << "\n";
-  }
-
-  return s;
 }
 
 int main() {
