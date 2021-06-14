@@ -83,7 +83,7 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const int length = 10, cons
     }
   } else {
     graph = gen_random_unweighted_graph(length);
-    out_unweighted_graph(graph);
+    out_unweighted_graph(graph, "input graph");
   }
 
   return graph;

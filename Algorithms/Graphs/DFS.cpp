@@ -4,49 +4,43 @@
 using namespace std;
 
 // Time: O(V + E); Space: O(V);
-void dfs_traversal(const unordered_map<int, vector<int>>& graph, unordered_set<int>& visited, const int root, const bool _debug = false, const bool _init = true) {
-  if (_init) {
+void dfs_traversal(const unordered_map<int, vector<int>>& graph, const int root, const bool _debug = false) {
+  auto dfs = [](const unordered_map<int, vector<int>>& graph, unordered_set<int>& visited, const int root, const bool _debug, const auto& _self) -> void {
     if (_debug) {
-      cout << "(";
+      cout << root;
     }
 
-    dfs_traversal(graph, visited, root, _debug, false);
+    visited.emplace(root);
 
-    if (_debug) {
-      cout << ")";
-    }
+    auto node_vector = graph.find(root)->second;
+    auto start = node_vector.begin(), end = node_vector.end();
+    auto itr = start;
+    for (itr = start; itr != end; itr++) {
+      if (visited.find(*itr) == visited.end()) {
+        if (_debug) {
+          cout << "(";
+        }
 
-    return;
-  }
-  
-  if (_debug) {
-    cout << root;
-  }
+        _self(graph, visited, *itr, _debug, _self);
 
-  visited.emplace(root);
-
-  vector<int> node_vector = graph.find(root)->second;
-  vector<int>::const_iterator start = node_vector.begin(), end = node_vector.end(), itr;
-  for (itr = start; itr != end; itr++) {
-    if (visited.find(*itr) == visited.end()) {
-      if (_debug) {
-        cout << "(";
-      }
-
-      dfs_traversal(graph, visited, *itr, _debug, false);
-
-      if (_debug) {
-        cout << ")";
+        if (_debug) {
+          cout << ")";
+        }
       }
     }
-  }
+  };
+
+  unordered_set<int> visited;
+
+  cout << "(";
+  dfs(graph, visited, root, _debug, dfs);
+  cout << ")";
 }
 
 int main() {
   unordered_map<int, vector<int>> graph = inp_graph_unweighted();
 
-  unordered_set<int> visited;
-  dfs_traversal(graph, visited, 0, true);
+  dfs_traversal(graph, 0, true);
   
   return 0;
 }
