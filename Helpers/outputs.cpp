@@ -155,6 +155,7 @@ void out_transtion_char_char_all(const vector<vector<pair<char, char>>>& value, 
   for (i = 0; i < length_i; i++) {
     cout << "    [ ";
 
+    length_j = value[i].size();
     for (j = 0; j < length_j; j++) {
       cout << "\'" << value[i][j].first << "\' -> \'" << value[i][j].second << "\', ";
     }
