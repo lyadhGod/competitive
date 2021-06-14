@@ -1,3 +1,5 @@
+#pragma once
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -82,3 +84,5 @@ string gen_random_string(const int length = 10, const bool with_space = false, c
 
   return s;
 }
+
+

@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include "../../Helpers/helpers.h"
 
 using namespace std;
@@ -51,7 +51,7 @@ string trim(const string& s, const string& d = " ", const bool _debug = false) {
   string ans = s.substr(start, last - start + 1);
 
   if (_debug) {
-    cout << "r_trim(): \"" << ans << "\"\n";
+    cout << "trim(): \"" << ans << "\"\n";
   }
 
   return ans;
@@ -64,3 +64,5 @@ int main() {
 
   return 0;
 }
+
+

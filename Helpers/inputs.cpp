@@ -1,8 +1,11 @@
-#include<bits/stdc++.h>
+#pragma once
+
+#include <bits/stdc++.h>
+#include "random.cpp"
 
 using namespace std;
 
-string inp_string(const bool with_space = true, const bool _dummy = true) {
+string inp_string(const bool with_space = false, const bool _dummy = true) {
   string s;
 
   cout << "input string: ";
@@ -13,11 +16,7 @@ string inp_string(const bool with_space = true, const bool _dummy = true) {
       cin >> s;
     }
   } else {
-    if (with_space) {
-      s = "Black Lives Matter";
-    } else {
-      s = "Black";
-    }
+    s = gen_random_string(10, with_space);
     cout << s << "\n";
   }
 
@@ -111,3 +110,5 @@ unordered_map<int, vector<int>> inp_graph_unweighted(const bool _dummy = true) {
 
   return graph;
 }
+
+

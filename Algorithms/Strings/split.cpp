@@ -54,9 +54,11 @@ vector<string> split(const string& s, const string& d = " ", const bool _debug =
 }
 
 int main() {
-  string s = inp_string();
+  string s = inp_string(true);
 
   split(s, " ", true);
 
   return 0;
 }
+
+
