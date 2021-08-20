@@ -49,7 +49,7 @@ int pow_integer_mod(
     n *= -1;
   }
 
-  // From Numbers/mod.cpp#mod_mul
+  // From Numbers/mod.cpp#mod_mul()
   auto mod_mul = [&](
     const int& a,
     const int& b,

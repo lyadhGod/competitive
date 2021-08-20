@@ -5,8 +5,8 @@ using namespace std;
 
 // Time: O(MNP); Space: O(MP);
 vector<vector<int>> mul(
-  vector<vector<int>>& a,
-  vector<vector<int>>& b,
+  const vector<vector<int>>& a,
+  const vector<vector<int>>& b,
   const bool& _debug = true
 ) {
   vector<vector<int>> mat;
