@@ -4,49 +4,70 @@
 
 using namespace std;
 
-void out_int(const int value, const string& label = "") {
+void out_int(
+  const int value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
   cout << value << "\n";
 }
 
-void out_long(const long value, const string& label = "") {
+void out_long(
+  const long value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
   cout << value << "\n";
 }
 
-void out_long_long(const long long value, const string& label = "") {
+void out_long_long(
+  const long long value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
   cout << value << "\n";
 }
 
-void out_double(const double value, const string& label = "") {
+void out_double(
+  const double value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
   cout << value << "\n";
 }
 
-void out_char(const char value, const string& label = "") {
+void out_char(
+  const char value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
-  cout << "\'" << value << "\"'\n";
+  cout << "\'" << value << "\'\n";
 }
 
-void out_string(const string& value, const string& label = "") {
+void out_string(
+  const string& value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
   cout << "\"" << value << "\"\n";
 }
 
-void out_unweighted_graph(const unordered_map<int, vector<int>>& value, const string& label = "") {
+void out_unweighted_graph(
+  const unordered_map<int, vector<int>>& value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
@@ -69,7 +90,10 @@ void out_unweighted_graph(const unordered_map<int, vector<int>>& value, const st
   cout << "}\n";
 }
 
-void out_weighted_graph(const unordered_map<int, vector<pair<int, int>>>& value, const string& label = "") {
+void out_weighted_graph(
+  const unordered_map<int, vector<pair<int, int>>>& value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
@@ -92,7 +116,10 @@ void out_weighted_graph(const unordered_map<int, vector<pair<int, int>>>& value,
   cout << "}\n";
 }
 
-void out_vector_string(const vector<string>& value, const string& label = "") {
+void out_vector_string(
+  const vector<string>& value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
@@ -106,7 +133,10 @@ void out_vector_string(const vector<string>& value, const string& label = "") {
   cout << "]\n";
 }
 
-void out_matrix_int(const vector<vector<int>>& value, const string& label = "") {
+void out_matrix_int(
+  const vector<vector<int>>& value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
@@ -131,7 +161,10 @@ void out_matrix_int(const vector<vector<int>>& value, const string& label = "") 
   cout << "]\n";
 }
 
-void out_transtion_char_char(const vector<pair<char, char>>& value, const string& label = "") {
+void out_transtion_char_char(
+  const vector<pair<char, char>>& value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }
@@ -145,7 +178,10 @@ void out_transtion_char_char(const vector<pair<char, char>>& value, const string
   cout << "]\n";
 }
 
-void out_transtion_char_char_all(const vector<vector<pair<char, char>>>& value, const string& label = "") {
+void out_transtion_char_char_all(
+  const vector<vector<pair<char, char>>>& value,
+  const string& label = ""
+) {
   if (label.size() > 0) {
     cout << label << ": ";
   }

@@ -4,7 +4,11 @@
 using namespace std;
 
 // Time: O(N); Space: O(N); 
-vector<string> split(const string& s, const string& d = " ", const bool _debug = false) {
+vector<string> split(
+  const string& s,
+  const string& d = " ",
+  const bool _debug = false
+) {
   vector<string> v;
 
   int i;
@@ -43,6 +47,7 @@ vector<string> split(const string& s, const string& d = " ", const bool _debug =
 
   if (_debug) {
     out_vector_string(v, "split()");
+    cout << "\n";
   }
 
   return v;

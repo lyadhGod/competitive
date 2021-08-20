@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+
 #define FO(i, n) for(i = 0; i < n; i++)
 #define FOA(i, a, n) for(i = a; i < n; i++)
 #define FOK(i, n, k) for(i = 0; i < n; i += k)
@@ -63,191 +64,7 @@
 
 using namespace std;
 
-struct Debug {
-    template<typename T> void var(const string label, const T &var) { 
-        cout << "\ndebugging >>> " << label << ": " << var << "\n\n"; 
-    }
-
-    template<typename T, typename R> void pair(const string label, const pair<T, R> &var) { 
-        cout << "\ndebugging >>> " << label << ": " << var.first << ", " << var.second << "\n\n"; 
-    }
-
-    template<typename T> void seq(const string label, const vector<T> &var) {
-        cout << "\ndebugging >>> " << label << ": [ ";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            cout << *start;
-            for(auto iter = ++start; iter != end; iter++) {
-                cout << ", " << *iter;
-            }
-        }
-        cout << " ]\n\n";
-    }
-    template<typename T> void seq(const string label, const forward_list<T> &var) {
-        cout << "\ndebugging >>> " << label << ": [ ";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            cout << *start;
-            for(auto iter = ++start; iter != end; iter++) {
-                cout << ", " << *iter;
-            }
-        }
-        cout << " ]\n\n";
-    }
-    template<typename T> void seq(const string label, const list<T> &var) {
-        cout << "\ndebugging >>> " << label << ": [ ";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            cout << *start;
-            for(auto iter = ++start; iter != end; iter++) {
-                cout << ", " << *iter;
-            }
-        }
-        cout << " ]\n\n";
-    }
-    
-    template<typename T> void tree(const string label, const set<T> &var) {
-        cout << "\ndebugging >>> " << label << ": ( ";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            cout << *start;
-            for(auto iter = ++start; iter != end; iter++) {
-                cout << ", " << *iter;
-            }
-        }
-        cout << " )\n\n";
-    }
-    template<typename T> void tree(const string label, const multiset<T> &var) {
-        cout << "\ndebugging >>> " << label << ": ( ";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            cout << *start;
-            for(auto iter = ++start; iter != end; iter++) {
-                cout << ", " << *iter;
-            }
-        }
-        cout << " )\n\n";
-    }
-    template<typename T, typename R> void tree(const string label, const map<T, R> &var) {
-        cout << "\ndebugging >>> " << label << ": (\n";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            for(auto iteri = start; iteri != end; iteri++) {
-                cout << iteri->first << ": " << iteri->second << ",\n";
-            }
-        }
-        cout << ")\n\n";
-    }
-    template<typename T, typename R> void tree(const string label, const multimap<T, R> &var) {
-        cout << "\ndebugging >>> " << label << ": (\n";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            for(auto iteri = start; iteri != end; iteri++) {
-                cout << iteri->first << ": " << iteri->second << ",\n";
-            }
-        }
-        cout << ")\n\n";
-    }
-
-    template<typename T> void assoc(const string label, const unordered_set<T> &var) {
-        cout << "\ndebugging >>> " << label << ": { ";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            cout << *start;
-            for(auto iter = ++start; iter != end; iter++) {
-                cout << ", " << *iter;
-            }
-        }
-        cout << " }\n\n";
-    }
-    template<typename T> void assoc(const string label, const unordered_multiset<T> &var) {
-        cout << "\ndebugging >>> " << label << ": { ";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            cout << *start;
-            for(auto iter = ++start; iter != end; iter++) {
-                cout << ", " << *iter;
-            }
-        }
-        cout << " }\n\n";
-    }
-    template<typename T, typename R> void assoc(const string label, const unordered_map<T, R> &var) {
-        cout << "\ndebugging >>> " << label << ": {\n";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            for(auto iteri = start; iteri != end; iteri++) {
-                cout << iteri->first << ": " << iteri->second << ",\n";
-            }
-        }
-        cout << "}\n\n";
-    }
-    template<typename T, typename R> void assoc(const string label, const unordered_multimap<T, R> &var) {
-        cout << "\ndebugging >>> " << label << ": {\n";
-        if(var.size() > 0) {
-            auto start = var.begin(), end = var.end();
-
-            for(auto iteri = start; iteri != end; iteri++) {
-                cout << iteri->first << ": " << iteri->second << ",\n";
-            }
-        }
-        cout << "}\n\n";
-    }
-
-    template<typename T, typename P> void graph_unweighted(const string label, const unordered_map<T, vector<P>> &var) {
-        cout << "\ndebugging >>> " << label << ": {\n";
-        if(var.size() > 0) {
-            auto starti = var.begin(), endi = var.end();
-
-            for(auto iteri = starti; iteri != endi; iteri++) {
-                cout << iteri->first << ": [ ";
-                
-                if(iteri->second.size() > 0) {
-                    auto startj = var.begin(), endj = var.end();
-                    cout << *startj;
-                    for(auto iterj = ++startj; iterj != endj; iterj++) {
-                        cout << ", " << *iterj;
-                    }
-                }
-                
-                cout << " ],\n";
-            }
-        }
-        cout << "}\n\n";
-    }
-    template<typename T, typename P, typename Q> void graph_weighted(const string label, const unordered_map<T, const vector<std::pair<P, Q>>> &var) {
-        cout << "\ndebugging >>> " << label << ": {\n";
-        if(var.size() > 0) {
-            auto starti = var.begin(), endi = var.end();
-
-            for(auto iteri = starti; iteri != endi; iteri++) {
-                cout << iteri->first << ": [ ";
-                
-                if(iteri->second.size() > 0) {
-                    auto startj = var.begin(), endj = var.end();
-                    cout << "<" << startj->first ", " << startj->second;
-                    for(auto iterj = ++startj; iterj != endj; iterj++) {
-                        cout << "<" << iterj->first ", " << iterj->second;
-                    }
-                }
-                
-                cout << " ],\n";
-            }
-        }
-        cout << "}\n\n";
-    }
-};
-
-void solve(int &z, Debug &deb) {
+void solve(const int z) {
     int i, j, k;
 
     
@@ -260,17 +77,12 @@ int main() {
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    Debug deb;
-
-    vector<int> v{1, 3, 4};
-    deb.seq("K", v);
-
     int t;
     cin >> t;  
 
     int z;
     FOA(z, 1, t + 1) {
-        solve(z, deb);
+        solve(z);
     }
 
     return 0;

@@ -4,8 +4,18 @@
 using namespace std;
 
 // Time: O(V + E); Space: O(V);
-void dfs_traversal(const unordered_map<int, vector<int>>& graph, const int root, const bool _debug = false) {
-  auto dfs = [](const unordered_map<int, vector<int>>& graph, unordered_set<int>& visited, const int root, const bool _debug, const auto& _self) -> void {
+void dfs_traversal(
+  const unordered_map<int, vector<int>>& graph,
+  const int root,
+  const bool _debug = false
+) {
+  auto dfs = [](
+    const unordered_map<int, vector<int>>& graph,
+    unordered_set<int>& visited,
+    const int root,
+    const bool _debug,
+    const auto& _self
+  ) -> void {
     if (_debug) {
       cout << root;
     }
@@ -24,7 +34,7 @@ void dfs_traversal(const unordered_map<int, vector<int>>& graph, const int root,
         _self(graph, visited, *itr, _debug, _self);
 
         if (_debug) {
-          cout << ")";
+          cout << ")\n";
         }
       }
     }
@@ -32,9 +42,15 @@ void dfs_traversal(const unordered_map<int, vector<int>>& graph, const int root,
 
   unordered_set<int> visited;
 
-  cout << "(";
+  if (_debug) {
+    cout << "(";
+  }
+
   dfs(graph, visited, root, _debug, dfs);
-  cout << ")";
+
+  if (_debug) {
+    cout << ")";
+  }
 }
 
 int main() {

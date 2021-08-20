@@ -4,7 +4,14 @@
 using namespace std;
 
 // Time: O(N^2); Space: O(N^2);
-int edit_distance_num(const string& from, const string& to, const int addition_cost = 1, const int editting_cost = 1, const int deletion_cost = 1, const bool _debug = false) {
+int edit_distance_num(
+  const string& from,
+  const string& to,
+  const int addition_cost = 1,
+  const int editting_cost = 1,
+  const int deletion_cost = 1,
+  const bool _debug = false
+) {
   int i, j;
   
   int rows_count = to.size() + 1, columns_count = from.size() + 1;
@@ -42,13 +49,21 @@ int edit_distance_num(const string& from, const string& to, const int addition_c
   if (_debug) {
     out_matrix_int(vect, "edit_distance_num()[ vect ]");
     out_int(ans, "edit_distance_num()");
+    cout << "\n";
   }
 
   return ans;
 }
 
 // Time: O(N^2); Space: O(N^2);
-vector<pair<char, char>> edit_distance_string(const string& from, const string& to, const int addition_cost = 1, const int editting_cost = 1, const int deletion_cost = 1, const bool _debug = false) {
+vector<pair<char, char>> edit_distance_string(
+  const string& from,
+  const string& to,
+  const int addition_cost = 1,
+  const int editting_cost = 1,
+  const int deletion_cost = 1,
+  const bool _debug = false
+) {
   int i, j, k;
   
   int rows_count = to.size() + 1, columns_count = from.size() + 1;
@@ -122,13 +137,21 @@ vector<pair<char, char>> edit_distance_string(const string& from, const string& 
   if (_debug) {
     out_matrix_int(vect, "edit_distance_string()[ vect ]");
     out_transtion_char_char(ans, "edit_distance_string()");
+    cout << "\n";
   }
 
   return ans;
 }
 
 // Time: O(N^2); Space: O(N^2);
-vector<vector<pair<char, char>>> edit_distance_string_all(const string& from, const string& to, const int addition_cost = 1, const int editting_cost = 1, const int deletion_cost = 1, const bool _debug = false) {
+vector<vector<pair<char, char>>> edit_distance_string_all(
+  const string& from,
+  const string& to,
+  const int addition_cost = 1,
+  const int editting_cost = 1,
+  const int deletion_cost = 1,
+  const bool _debug = false
+) {
   int i, j, k;
   
   int rows_count = to.size() + 1, columns_count = from.size() + 1;
@@ -233,15 +256,18 @@ vector<vector<pair<char, char>>> edit_distance_string_all(const string& from, co
   if (_debug) {
     out_matrix_int(vect, "edit_distance_string_all()[ vect ]");
     out_transtion_char_char_all(ans, "edit_distance_string_all()");
+    cout << "\n";
   }
 
   return ans;
 }
 
 int main() {
-  string from = inp_string(false, false);
-  string to = inp_string(false, false);
+  string from = inp_string(false, true);
+  string to = inp_string(false, true);
 
+  edit_distance_num(from, to, 1, 1, 1, true);
+  edit_distance_string(from, to, 1, 1, 1, true);
   edit_distance_string_all(from, to, 1, 1, 1, true);
 
   return 0;

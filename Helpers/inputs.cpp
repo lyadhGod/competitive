@@ -6,7 +6,10 @@
 
 using namespace std;
 
-string inp_string(const bool with_space = false, const bool _dummy = true) {
+string inp_string(
+  const bool with_space = false,
+  const bool _dummy = true
+) {
   string s;
 
   cout << "input string: ";
@@ -24,7 +27,10 @@ string inp_string(const bool with_space = false, const bool _dummy = true) {
   return s;
 }
 
-unordered_map<int, vector<int>> inp_graph_unweighted(const int length = 10, const bool _dummy = true) {
+unordered_map<int, vector<int>> inp_graph_unweighted(
+  const int length = 10,
+  const bool _dummy = true
+) {
   unordered_map<int, vector<int>> graph;
 
   if (!_dummy) {
