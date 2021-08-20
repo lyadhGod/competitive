@@ -94,6 +94,30 @@ string gen_random_string(
   return s;
 }
 
+vector<int> gen_random_vector_int(
+  const unsigned int& length = 10U,
+  const int& min = -1000000007,
+  const int& max = 1000000007,
+  const bool& _debug = false
+) {
+  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
+  uniform_int_distribution<int> distribution(min, max);
+
+  int i, j;
+
+  vector<int> ans(length);
+  for (i = 0; i < length; i++) {
+    ans[i] = distribution(engine);
+  }
+
+  if (_debug) {
+    out_vector_int(ans, "gen_random_vector_int()");
+    cout << "\n";
+  }
+
+  return ans;
+}
+
 unordered_map<int, vector<int>> gen_random_unweighted_graph(
   const unsigned int& length = 10U,
   const bool& has_forced_disconnection = false,

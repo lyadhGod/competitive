@@ -66,6 +66,38 @@ string inp_string(
   return s;
 }
 
+vector<int> inp_vector_int(
+  const string& label,
+  const unsigned int& length = 10U,
+  const int& min = -1000000007,
+  const int& max = 1000000007,
+  const bool& _dummy = true
+) {
+  vector<int> s;
+
+  cout << label << ": ";
+  if (!_dummy) {
+    cout << "\n";
+    
+    cout << "element count: ";
+    int n;
+    cin >> n;
+
+    int i, j;
+    s.resize(n);
+
+    cout << "vector (\' \' separated elements):\n";
+    for (i = 0; i < n; i++) {
+      cin >> s[i];
+    }
+  } else {
+    s = gen_random_vector_int(length, min, max);
+    out_vector_int(s);
+  }
+
+  return s;
+}
+
 unordered_map<int, vector<int>> inp_graph_unweighted(
   const string& label,
   const unsigned int& length = 10U,
@@ -175,5 +207,4 @@ vector<vector<int>> inp_matrix_int(
 
   return s;
 }
-
 
