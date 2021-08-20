@@ -18,6 +18,7 @@ int pow_integer(
 
   int res = 1;
   if (mod > 0) {
+    // From Numbers/mod.cpp
     auto mod_mul = [&](
       const int& a,
       const int& b,

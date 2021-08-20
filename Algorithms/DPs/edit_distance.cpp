@@ -187,7 +187,20 @@ vector<vector<pair<char, char>>> edit_distance_string_all(
   vector<vector<pair<char, char>>> ans;
 
   ans.emplace_back(vector<pair<char, char>>());
-  auto func = ([&from, &to, addition_cost, editting_cost, deletion_cost, &vect, &ans](int i, int j, int k, auto& _self) -> void {
+  auto func = [
+    &from,
+    &to,
+    addition_cost,
+    editting_cost,
+    deletion_cost,
+    &vect,
+    &ans
+  ](
+    int i,
+    int j,
+    int k,
+    auto& _self
+  ) -> void {
     int count;
     while (i > 0 && j > 0) {
       if (from[j - 1] == to[i - 1]) {
@@ -248,7 +261,7 @@ vector<vector<pair<char, char>>> edit_distance_string_all(
       j--;
     }
     ans[k].shrink_to_fit();
-  });
+  };
 
   func(rows_count - 1, columns_count - 1, 0, func);
   ans.shrink_to_fit();

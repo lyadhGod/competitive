@@ -57,7 +57,7 @@ double gen_random_double(
 }
 
 string gen_random_string(
-  const int& length = 10,
+  const unsigned int& length = 10U,
   const bool& with_space = false,
   const bool& _debug = false
 ) {
@@ -95,7 +95,7 @@ string gen_random_string(
 }
 
 unordered_map<int, vector<int>> gen_random_unweighted_graph(
-  const int& length = 10,
+  const unsigned int& length = 10U,
   const bool& has_forced_disconnection = false,
   const bool& _debug = false
 ) {
@@ -128,7 +128,7 @@ unordered_map<int, vector<int>> gen_random_unweighted_graph(
 }
 
 unordered_map<int, vector<pair<int, int>>> gen_random_weighted_graph(
-  const int& length = 10,
+  const unsigned int& length = 10U,
   const int& min_weight = 0,
   const int& max_weight = 10,
   const bool& has_forced_disconnection = false,
@@ -163,4 +163,31 @@ unordered_map<int, vector<pair<int, int>>> gen_random_weighted_graph(
   return graph;
 }
 
+vector<vector<int>> gen_random_matrix(
+  const unsigned int& rows = 2U,
+  const unsigned int& columns = 3U,
+  const int& min = -1000000007,
+  const int& max = 1000000007,
+  const bool& _debug = false
+) {
+  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
+  uniform_int_distribution<int> distribution(min, max);
+
+  int i, j;
+
+  vector<vector<int>> ans(rows);
+  for (i = 0; i < rows; i++) {
+    ans[i].resize(columns);
+    for (j = 0; j < columns; j++) {
+      ans[i][j] = distribution(engine);
+    }
+  }
+
+  if (_debug) {
+    out_matrix_int(ans, "gen_random_matrix()");
+    cout << "\n";
+  }
+
+  return ans;
+}
 

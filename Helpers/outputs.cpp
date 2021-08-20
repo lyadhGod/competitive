@@ -134,7 +134,7 @@ void out_matrix_int(
       cout << value[i][j] << ", ";
     }
 
-    cout << "]\n";
+    cout << "],\n";
   }
 
   cout << "]\n";
@@ -162,7 +162,7 @@ void out_matrix_long_long(
       cout << value[i][j] << ", ";
     }
 
-    cout << "]\n";
+    cout << "],\n";
   }
 
   cout << "]\n";
@@ -190,7 +190,7 @@ void out_matrix_double(
       cout << value[i][j] << ", ";
     }
 
-    cout << "]\n";
+    cout << "],\n";
   }
 
   cout << "]\n";
