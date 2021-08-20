@@ -64,21 +64,47 @@
 
 using namespace std;
 
-void solve(const int z) {
+void fast_inp_int(
+  int& num,
+  const char delim = ' '
+) {
+  bool negative = false;
+  register int c;
+
+  c = getchar();
+  while (c == delim) {
+      c = getchar();
+  };
+  if (c == '-') {
+      negative = true;
+      c = getchar();
+  }
+
+  num = 0;
+  for (; (c > 47 && c < 58); c = getchar()) {
+      num = (num << 3) + (num << 1) + (c - 48);
+  }
+
+  if (negative) {
+      num *= -1;
+  }
+}
+
+void solve(const int& z) {
     int i, j, k;
 
     
 }
 
 int main() {
-    cout << "compiled...\n\n";
+    cout << "running...\n\n";
 
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
 
     int t;
-    cin >> t;  
+    fast_inp_int(t);  
 
     int z;
     FOA(z, 1, t + 1) {
