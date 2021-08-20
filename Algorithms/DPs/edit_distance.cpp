@@ -10,7 +10,7 @@ int edit_distance_num(
   const int addition_cost = 1,
   const int editting_cost = 1,
   const int deletion_cost = 1,
-  const bool _debug = false
+  const bool _debug = true
 ) {
   int i, j;
   
@@ -62,7 +62,7 @@ vector<pair<char, char>> edit_distance_string(
   const int addition_cost = 1,
   const int editting_cost = 1,
   const int deletion_cost = 1,
-  const bool _debug = false
+  const bool _debug = true
 ) {
   int i, j, k;
   
@@ -150,7 +150,7 @@ vector<vector<pair<char, char>>> edit_distance_string_all(
   const int addition_cost = 1,
   const int editting_cost = 1,
   const int deletion_cost = 1,
-  const bool _debug = false
+  const bool _debug = true
 ) {
   int i, j, k;
   
@@ -266,9 +266,9 @@ int main() {
   string from = inp_string(false, true);
   string to = inp_string(false, true);
 
-  edit_distance_num(from, to, 1, 1, 1, true);
-  edit_distance_string(from, to, 1, 1, 1, true);
-  edit_distance_string_all(from, to, 1, 1, 1, true);
+  edit_distance_num(from, to, 1, 1, 1);
+  edit_distance_string(from, to, 1, 1, 1);
+  edit_distance_string_all(from, to, 1, 1, 1);
 
   return 0;
 }

@@ -7,7 +7,7 @@ using namespace std;
 void dfs_traversal(
   const unordered_map<int, vector<int>>& graph,
   const int root,
-  const bool _debug = false
+  const bool _debug = true
 ) {
   auto dfs = [](
     const unordered_map<int, vector<int>>& graph,
@@ -56,7 +56,7 @@ void dfs_traversal(
 int main() {
   unordered_map<int, vector<int>> graph = inp_graph_unweighted();
 
-  dfs_traversal(graph, 0, true);
+  dfs_traversal(graph, 0);
   
   return 0;
 }

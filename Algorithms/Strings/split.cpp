@@ -7,7 +7,7 @@ using namespace std;
 vector<string> split(
   const string& s,
   const string& d = " ",
-  const bool _debug = false
+  const bool _debug = true
 ) {
   vector<string> v;
 
@@ -56,7 +56,7 @@ vector<string> split(
 int main() {
   string s = inp_string();
 
-  split(s, " ", true);
+  split(s, " ");
 
   return 0;
 }

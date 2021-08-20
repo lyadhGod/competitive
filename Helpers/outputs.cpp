@@ -64,6 +64,102 @@ void out_string(
   cout << "\"" << value << "\"\n";
 }
 
+void out_vector_int(
+  const vector<int>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[ ";
+
+  int i, length = value.size();
+  for (i = 0; i < length; i++) {
+    cout << "\"" << value[i] << "\", ";
+  }
+
+  cout << "]\n";
+}
+
+void out_vector_long(
+  const vector<long>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[ ";
+
+  int i, length = value.size();
+  for (i = 0; i < length; i++) {
+    cout << "\"" << value[i] << "\", ";
+  }
+
+  cout << "]\n";
+}
+
+void out_vector_long_long(
+  const vector<long long>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[ ";
+
+  int i, length = value.size();
+  for (i = 0; i < length; i++) {
+    cout << "\"" << value[i] << "\", ";
+  }
+
+  cout << "]\n";
+}
+
+void out_vector_string(
+  const vector<string>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[ ";
+
+  int i, length = value.size();
+  for (i = 0; i < length; i++) {
+    cout << "\"" << value[i] << "\", ";
+  }
+
+  cout << "]\n";
+}
+
+void out_matrix_int(
+  const vector<vector<int>>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[\n";
+
+  int length_i = value.size(), length_j;
+  if (length_i > 0) {
+    length_j = value[0].size();
+  }
+
+  int i, j;
+  for (i = 0; i < length_i; i++) {
+    cout << "    [ ";
+  
+    for (j = 0; j < length_j; j++) {
+      cout << value[i][j] << ", ";
+    }
+
+    cout << "]\n";
+  }
+
+  cout << "]\n";
+}
+
 void out_unweighted_graph(
   const unordered_map<int, vector<int>>& value,
   const string& label = ""
@@ -114,51 +210,6 @@ void out_weighted_graph(
   }
 
   cout << "}\n";
-}
-
-void out_vector_string(
-  const vector<string>& value,
-  const string& label = ""
-) {
-  if (label.size() > 0) {
-    cout << label << ": ";
-  }
-  cout << "[ ";
-
-  int i, length = value.size();
-  for (i = 0; i < length; i++) {
-    cout << "\"" << value[i] << "\", ";
-  }
-
-  cout << "]\n";
-}
-
-void out_matrix_int(
-  const vector<vector<int>>& value,
-  const string& label = ""
-) {
-  if (label.size() > 0) {
-    cout << label << ": ";
-  }
-  cout << "[\n";
-
-  int length_i = value.size(), length_j;
-  if (length_i > 0) {
-    length_j = value[0].size();
-  }
-
-  int i, j;
-  for (i = 0; i < length_i; i++) {
-    cout << "    [ ";
-  
-    for (j = 0; j < length_j; j++) {
-      cout << value[i][j] << ", ";
-    }
-
-    cout << "]\n";
-  }
-
-  cout << "]\n";
 }
 
 void out_transtion_char_char(
