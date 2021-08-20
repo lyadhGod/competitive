@@ -4,9 +4,10 @@
 using namespace std;
 
 // Time: O(logN); Space: O(1);
-int pow_int(
+int pow_integer(
   const int& num,
   const unsigned int& exp,
+  const unsigned int& mod = 0,
   const bool& _debug = true
 ) {
   unsigned int a = exp;
@@ -16,12 +17,49 @@ int pow_int(
   }
 
   int res = 1;
-  while (a > 0) {
-    if (a & 1) {
-      res *= n;
+  if (mod > 0) {
+    auto mod_mul = [&](
+      const int& a,
+      const int& b,
+      const unsigned int& mod
+    ) -> int {
+      int x = a;
+      if (x < 0) {
+        x += mod;
+      } else if (x >= mod) {
+        x %= mod;
+      }
+
+      int y = b;
+      if (y < 0) {
+        y += mod;
+      } else if (y >= mod) {
+        y %= mod;
+      }
+
+      int res = x * y;
+      if (res < 0) {
+        res += mod;
+      } else if (res >= mod) {
+        res %= mod;
+      }
+    };
+
+    while (a > 0) {
+      if (a & 1) {
+        res = mod_mul(res, n, mod);
+      }
+      n = mod_mul(n, n, mod);
+      a >>= 1;
     }
-    n *= n;
-    a >>= 1;
+  } else {
+    while (a > 0) {
+      if (a & 1) {
+        res *= n;
+      }
+      n *= n;
+      a >>= 1;
+    }
   }
 
   if ((num < 0) && (exp & 1)) {
@@ -29,40 +67,7 @@ int pow_int(
   }
 
   if (_debug) {
-    out_int(res, "pow_int()");
-    cout << "\n";
-  }
-
-  return res;
-}
-
-// Time: O(logN); Space: O(1);
-int pow_long_long(
-  const long long& num,
-  const unsigned long long& exp,
-  const bool& _debug = true
-) {
-  unsigned long long a = exp;
-  long long n = num;
-  if (n < 0LL) {
-    n *= -1LL;
-  }
-
-  long long res = 1LL;
-  while (a > 0LL) {
-    if (a & 1LL) {
-      res *= n;
-    }
-    n *= n;
-    a >>= 1;
-  }
-
-  if ((num < 0LL) && (exp & 1LL)) {
-    res *= -1LL;
-  }
-
-  if (_debug) {
-    out_long_long(res, "pow_long_long()");
+    out_int(res, "pow_integer()");
     cout << "\n";
   }
 
@@ -70,13 +75,10 @@ int pow_long_long(
 }
 
 int main() {
-  int num_int = inp_int("num_int", -10, 10);
-  unsigned int exp_int = inp_int("exp_int", 0, 10);
-  pow_int(num_int, exp_int);
+  int num = inp_int("num", -10, 10);
+  unsigned int exp_int = inp_int("exp", 0, 10);
 
-  long long num_long_long = inp_long_long("num_long_long", -10LL, 10LL);
-  unsigned long long exp_long_long = inp_long_long("exp_long_long", 0LL, 10LL);
-  pow_long_long(num_long_long, exp_long_long);
+  pow_integer(num, exp_int, 1000000007);
 
   return 0;
 }
