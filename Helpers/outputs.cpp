@@ -14,16 +14,6 @@ void out_int(
   cout << value << "\n";
 }
 
-void out_long(
-  const long value,
-  const string& label = ""
-) {
-  if (label.size() > 0) {
-    cout << label << ": ";
-  }
-  cout << value << "\n";
-}
-
 void out_long_long(
   const long long value,
   const string& label = ""
@@ -42,16 +32,6 @@ void out_double(
     cout << label << ": ";
   }
   cout << value << "\n";
-}
-
-void out_char(
-  const char value,
-  const string& label = ""
-) {
-  if (label.size() > 0) {
-    cout << label << ": ";
-  }
-  cout << "\'" << value << "\'\n";
 }
 
 void out_string(
@@ -75,24 +55,7 @@ void out_vector_int(
 
   int i, length = value.size();
   for (i = 0; i < length; i++) {
-    cout << "\"" << value[i] << "\", ";
-  }
-
-  cout << "]\n";
-}
-
-void out_vector_long(
-  const vector<long>& value,
-  const string& label = ""
-) {
-  if (label.size() > 0) {
-    cout << label << ": ";
-  }
-  cout << "[ ";
-
-  int i, length = value.size();
-  for (i = 0; i < length; i++) {
-    cout << "\"" << value[i] << "\", ";
+    cout << value[i] << ", ";
   }
 
   cout << "]\n";
@@ -109,7 +72,24 @@ void out_vector_long_long(
 
   int i, length = value.size();
   for (i = 0; i < length; i++) {
-    cout << "\"" << value[i] << "\", ";
+    cout << value[i] << ", ";
+  }
+
+  cout << "]\n";
+}
+
+void out_vector_double(
+  const vector<double>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[ ";
+
+  int i, length = value.size();
+  for (i = 0; i < length; i++) {
+    cout << value[i] << ", ";
   }
 
   cout << "]\n";
@@ -134,6 +114,62 @@ void out_vector_string(
 
 void out_matrix_int(
   const vector<vector<int>>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[\n";
+
+  int length_i = value.size(), length_j;
+  if (length_i > 0) {
+    length_j = value[0].size();
+  }
+
+  int i, j;
+  for (i = 0; i < length_i; i++) {
+    cout << "    [ ";
+  
+    for (j = 0; j < length_j; j++) {
+      cout << value[i][j] << ", ";
+    }
+
+    cout << "]\n";
+  }
+
+  cout << "]\n";
+}
+
+void out_matrix_long_long(
+  const vector<vector<long long>>& value,
+  const string& label = ""
+) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[\n";
+
+  int length_i = value.size(), length_j;
+  if (length_i > 0) {
+    length_j = value[0].size();
+  }
+
+  int i, j;
+  for (i = 0; i < length_i; i++) {
+    cout << "    [ ";
+  
+    for (j = 0; j < length_j; j++) {
+      cout << value[i][j] << ", ";
+    }
+
+    cout << "]\n";
+  }
+
+  cout << "]\n";
+}
+
+void out_matrix_double(
+  const vector<vector<double>>& value,
   const string& label = ""
 ) {
   if (label.size() > 0) {

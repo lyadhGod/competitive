@@ -7,7 +7,7 @@ using namespace std;
 string l_trim(
   const string& s,
   const string& d = " ",
-  const bool _debug = true
+  const bool& _debug = true
 ) {
   size_t start = s.find_first_not_of(d);
 
@@ -30,7 +30,7 @@ string l_trim(
 string r_trim(
   const string& s,
   const string& d = " ",
-  const bool _debug = true
+  const bool& _debug = true
 ) {
   size_t last = s.find_last_not_of(d);
 
@@ -53,7 +53,7 @@ string r_trim(
 string trim(
   const string& s,
   const string& d = " ",
-  const bool _debug = true
+  const bool& _debug = true
 ) {
   size_t start = s.find_first_not_of(d);
 
@@ -73,7 +73,7 @@ string trim(
 }
 
 int main() {
-  string s = inp_string();
+  string s = inp_string(s);
 
   l_trim(s, " ");
   r_trim(s, " ");

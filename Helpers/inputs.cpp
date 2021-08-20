@@ -6,13 +6,52 @@
 
 using namespace std;
 
+int inp_int(
+  const string& label,
+  const int& min = -1000000007,
+  const int& max = 1000000007,
+  const bool& _dummy = true
+) {
+  int s;
+
+  cout << label << ": ";
+  if (!_dummy) {
+    cin >> s;
+  } else {
+    s = gen_random_int(min, max);
+    out_int(s);
+  }
+
+  return s;
+}
+
+int inp_long_long(
+  const string& label,
+  const long long& min = -1000000007LL,
+  const long long& max = 1000000007LL,
+  const bool& _dummy = true
+) {
+  int s;
+
+  cout << label << ": ";
+  if (!_dummy) {
+    cin >> s;
+  } else {
+    s = gen_random_long_long(min, max);
+    out_long_long(s);
+  }
+
+  return s;
+}
+
 string inp_string(
-  const bool with_space = false,
-  const bool _dummy = true
+  const string& label,
+  const bool& with_space = false,
+  const bool& _dummy = true
 ) {
   string s;
 
-  cout << "input string: ";
+  cout << label << ": ";
   if (!_dummy) {
     if (with_space) {
       getline(cin, s);
@@ -28,11 +67,13 @@ string inp_string(
 }
 
 unordered_map<int, vector<int>> inp_graph_unweighted(
-  const int length = 10,
-  const bool _dummy = true
+  const string& label,
+  const int& length = 10,
+  const bool& _dummy = true
 ) {
   unordered_map<int, vector<int>> graph;
 
+  cout << label << ":\n";
   if (!_dummy) {
     cout << "nodes count: ";
     int N;

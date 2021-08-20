@@ -6,9 +6,9 @@
 using namespace std;
 
 int gen_random_int(
-  const int min = -1000000007,
-  const int max = 1000000007,
-  const bool _debug = false
+  const int& min = -1000000007,
+  const int& max = 1000000007,
+  const bool& _debug = false
 ) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> distribution(min, max);
@@ -22,27 +22,10 @@ int gen_random_int(
   return ans;
 }
 
-long gen_random_long(
-  const long min = -1000000007L,
-  const long max = 1000000007L,
-  const bool _debug = false
-) {
-  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
-  uniform_int_distribution<long> distribution(min, max);
-  long ans = distribution(engine);
-
-  if (_debug) {
-    out_long(ans, "gen_random_long()");
-    cout << "\n";
-  }
-
-  return ans;
-}
-
 long long gen_random_long_long(
   const long long min = -1000000007LL,
   const long long max = 1000000007LL,
-  const bool _debug = false
+  const bool& _debug = false
 ) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<long long> distribution(min, max);
@@ -59,7 +42,7 @@ long long gen_random_long_long(
 double gen_random_double(
   const double min = -1000000007.0,
   const double max = 1000000007.0,
-  const bool _debug = false
+  const bool& _debug = false
 ) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_real_distribution<double> distribution(min, max);
@@ -74,9 +57,9 @@ double gen_random_double(
 }
 
 string gen_random_string(
-  const int length = 10,
-  const bool with_space = false,
-  const bool _debug = false
+  const int& length = 10,
+  const bool& with_space = false,
+  const bool& _debug = false
 ) {
   vector<char> char_space = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -112,9 +95,9 @@ string gen_random_string(
 }
 
 unordered_map<int, vector<int>> gen_random_unweighted_graph(
-  const int length = 10,
-  const bool has_forced_disconnection = false,
-  const bool _debug = false
+  const int& length = 10,
+  const bool& has_forced_disconnection = false,
+  const bool& _debug = false
 ) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> node_distribution(0, length - 1);
@@ -145,11 +128,11 @@ unordered_map<int, vector<int>> gen_random_unweighted_graph(
 }
 
 unordered_map<int, vector<pair<int, int>>> gen_random_weighted_graph(
-  const int length = 10,
-  const int min_weight = 0,
-  const int max_weight = 10,
-  const bool has_forced_disconnection = false,
-  const bool _debug = false
+  const int& length = 10,
+  const int& min_weight = 0,
+  const int& max_weight = 10,
+  const bool& has_forced_disconnection = false,
+  const bool& _debug = false
 ) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> node_distribution(0, length - 1);

@@ -7,10 +7,10 @@ using namespace std;
 int edit_distance_num(
   const string& from,
   const string& to,
-  const int addition_cost = 1,
-  const int editting_cost = 1,
-  const int deletion_cost = 1,
-  const bool _debug = true
+  const int& addition_cost = 1,
+  const int& editting_cost = 1,
+  const int& deletion_cost = 1,
+  const bool& _debug = true
 ) {
   int i, j;
   
@@ -59,10 +59,10 @@ int edit_distance_num(
 vector<pair<char, char>> edit_distance_string(
   const string& from,
   const string& to,
-  const int addition_cost = 1,
-  const int editting_cost = 1,
-  const int deletion_cost = 1,
-  const bool _debug = true
+  const int& addition_cost = 1,
+  const int& editting_cost = 1,
+  const int& deletion_cost = 1,
+  const bool& _debug = true
 ) {
   int i, j, k;
   
@@ -147,10 +147,10 @@ vector<pair<char, char>> edit_distance_string(
 vector<vector<pair<char, char>>> edit_distance_string_all(
   const string& from,
   const string& to,
-  const int addition_cost = 1,
-  const int editting_cost = 1,
-  const int deletion_cost = 1,
-  const bool _debug = true
+  const int& addition_cost = 1,
+  const int& editting_cost = 1,
+  const int& deletion_cost = 1,
+  const bool& _debug = true
 ) {
   int i, j, k;
   
@@ -263,12 +263,12 @@ vector<vector<pair<char, char>>> edit_distance_string_all(
 }
 
 int main() {
-  string from = inp_string(false, true);
-  string to = inp_string(false, true);
+  string from = inp_string("from");
+  string to = inp_string("to");
 
-  edit_distance_num(from, to, 1, 1, 1);
-  edit_distance_string(from, to, 1, 1, 1);
-  edit_distance_string_all(from, to, 1, 1, 1);
+  edit_distance_num(from, to);
+  edit_distance_string(from, to);
+  edit_distance_string_all(from, to);
 
   return 0;
 }
