@@ -75,19 +75,20 @@ vector<int> gen_random_vector_int(const int& length = 10, const int& min = -1000
   return ans;
 }
 
-unordered_map<int, vector<int>> gen_random_unweighted_graph(const unsigned int& length = 10, const bool& has_forced_disconnection = false, const bool& _debug = false) {
+// input an unweighted as vector of vectors where each index is a node and it's value is a vector of linked nodes
+vector<vector<int>> gen_random_unweighted_graph(const unsigned int& length = 10, const bool& has_forced_disconnection = false, const bool& _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> node_distribution(0, length - 1);
   uniform_int_distribution<int> connected_distribution(0, 1);
 
-  unordered_map<int, vector<int>> graph;
+  vector<vector<int>> graph(length);
 
   int i, j;
   int count;
   for (i = 0; i < length; i++) {
     count = node_distribution(engine);
 
-    graph[i] = vector<int>(count);
+    graph[i].resize(count);
 
     if (!(has_forced_disconnection && connected_distribution(engine))) {
       for (j = 0; j < count; j++) {

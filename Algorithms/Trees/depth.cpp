@@ -13,8 +13,10 @@ class Depth {
 
     // TOTAL TIME: O(N)
     // TOTAL SPACE: O(N)
-    // `init_depth` intializes the depth vector
-    vector<int> init_depth(const vector<int>& parent) {
+    // `initDepth` intializes the depth vector
+    vector<int> initDepth(const vector<int>& parent) {
+      this->depth.clear();
+
       int n = parent.size();
 
       this->depth.resize(n);
@@ -29,8 +31,8 @@ class Depth {
 
     // TOTAL TIME: O(N)
     // TOTAL SPACE: O(1)
-    // `calc_depth` calculates the depth of a node considering atleast the root node distance is initalized
-    int calc_depth(const vector<int>& parent, const int node) {
+    // `calcDepth` calculates the depth of a node considering atleast the root node distance is initalized
+    int calcDepth(const vector<int>& parent, const int node) {
       int dist = 0;
 
       if (this->depth[node] == -1) {
@@ -56,13 +58,13 @@ class Depth {
 
     // TOTAL TIME: O(N)
     // TOTAL SPACE: O(1)
-    // `calc_depth_all` is responsible for calculating the depth vector considering the depth vector is initialized
-    vector<int> calc_depth_all(const vector<int>& parent) {
+    // `calcDepthAll` is responsible for calculating the depth vector considering the depth vector is initialized
+    vector<int> calcDepthAll(const vector<int>& parent) {
       int n = parent.size();
 
       int i;
       for (i = 0; i < n; i++) {
-        this->calc_depth(parent, i);
+        this->calcDepth(parent, i);
       }
 
       return this->depth;
@@ -70,10 +72,10 @@ class Depth {
 
     // TOTAL TIME: O(N)
     // TOTAL SPACE: O(N)
-    // `calc_depth_all` is responsible for populating the depth vector
-    vector<int> perform_depth_calc(const vector<int>& parent) {
-      this->init_depth(parent);
-      this->calc_depth_all(parent);
+    // `calcDepthAll` is responsible for populating the depth vector
+    vector<int> initDepth_calcDepthAll(const vector<int>& parent) {
+      this->initDepth(parent);
+      this->calcDepthAll(parent);
 
       return this->depth;
     }
@@ -83,9 +85,9 @@ int main() {
   auto parent = inp_tree("parent");
 
   auto depth = Depth();
-  auto perform_depth_calc = depth.perform_depth_calc(parent);
+  auto initDepth_calcDepthAll = depth.initDepth_calcDepthAll(parent);
 
-  out_vector_int(perform_depth_calc, "Depth.perform_depth_calc()", true);
+  out_vector_int(initDepth_calcDepthAll, "Depth.initDepth_calcDepthAll()", true);
 
   return 0;
 }

@@ -61,7 +61,7 @@ vector<vector<int>> pow_mat(
 
   copy(mat, n);
 
-  // From Matrices/mul.cpp#mul()
+  // FROM /Matrices/mul.cpp#mul()
   auto mul = [](
     const vector<vector<int>>& a,
     const vector<vector<int>>& b,
