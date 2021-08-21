@@ -6,12 +6,8 @@
 
 using namespace std;
 
-int inp_int(
-  const string& label,
-  const int& min = -1000000007,
-  const int& max = 1000000007,
-  const bool& _dummy = true
-) {
+// input an integer in range [`min`, `max`]
+int inp_int(const string& label, const int& min = -1000000007, const int& max = 1000000007, const bool& _dummy = true) {
   int s;
 
   cout << label << ": ";
@@ -25,30 +21,8 @@ int inp_int(
   return s;
 }
 
-int inp_long_long(
-  const string& label,
-  const long long& min = -1000000007LL,
-  const long long& max = 1000000007LL,
-  const bool& _dummy = true
-) {
-  int s;
-
-  cout << label << ": ";
-  if (!_dummy) {
-    cin >> s;
-  } else {
-    s = gen_random_long_long(min, max);
-    out_long_long(s);
-  }
-
-  return s;
-}
-
-string inp_string(
-  const string& label,
-  const bool& with_space = false,
-  const bool& _dummy = true
-) {
+// input a string with/without spaces
+string inp_string(const string& label, const bool& with_space = false, const bool& _dummy = true) {
   string s;
 
   cout << label << ": ";
@@ -66,13 +40,8 @@ string inp_string(
   return s;
 }
 
-vector<int> inp_vector_int(
-  const string& label,
-  const unsigned int& length = 10U,
-  const int& min = -1000000007,
-  const int& max = 1000000007,
-  const bool& _dummy = true
-) {
+// input an integer vector of length `length` containing values in range [`min`, `max`]
+vector<int> inp_vector_int(const string& label, const int& length = 10, const int& min = -1000000007, const int& max = 1000000007, const bool& _dummy = true) {
   vector<int> s;
 
   cout << label << ": ";
@@ -98,11 +67,7 @@ vector<int> inp_vector_int(
   return s;
 }
 
-unordered_map<int, vector<int>> inp_graph_unweighted(
-  const string& label,
-  const unsigned int& length = 10U,
-  const bool& _dummy = true
-) {
+unordered_map<int, vector<int>> inp_graph_unweighted(const string& label, const unsigned int& length = 10U, const bool& _dummy = true) {
   unordered_map<int, vector<int>> graph;
 
   cout << label << ":\n";
@@ -166,14 +131,8 @@ unordered_map<int, vector<int>> inp_graph_unweighted(
   return graph;
 }
 
-vector<vector<int>> inp_matrix_int(
-  const string& label,
-  const unsigned int& rows = 2U,
-  const unsigned int& columns = 3U,
-  const int& min = -1000000007,
-  const int& max = 1000000007,
-  const bool& _dummy = true
-) {
+// input an integer vector of row count `rows` and column count `columns` containing values in range [`min`, `max`]
+vector<vector<int>> inp_matrix_int(const string& label, const int& rows = 2, const int& columns = 3, const int& min = -1000000007, const int& max = 1000000007, const bool& _dummy = true) {
   vector<vector<int>> s;
 
   cout << label << ": ";
@@ -208,3 +167,32 @@ vector<vector<int>> inp_matrix_int(
   return s;
 }
 
+// input a tree as vector where each index is a node and it's value is it's parent
+// root node has itself as it's parent
+vector<int> inp_tree(const string& label, const int& nodes = 10, const bool& _dummy = true) {
+  vector<int> inp;
+
+  cout << label << ": ";
+  if (!_dummy) {
+    cout << "\n";
+    
+    cout << "node count: ";
+    int n;
+    cin >> n;
+
+    inp.resize(n);
+
+    cout << "parent valued tree: [\n";
+    int i;
+    for (i = 0; i < n; i++) {
+      cout << "    " << i << ": ";
+      cin >> inp[i];
+    }
+    cout << "]\n";
+  } else {
+    inp = gen_random_tree(nodes);
+    out_vector_int(inp, "", true);
+  }
+
+  return inp;
+}

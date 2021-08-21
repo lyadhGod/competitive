@@ -4,11 +4,7 @@
 using namespace std;
 
 // Time: O(M); Space: O(1);
-void fast_inp_int(
-  int& num,
-  const char& delim = ' ',
-  const bool& _debug = true
-) {
+void fast_inp_int(int& num, const char& delim = ' ', const bool& _debug = true) {
   if (_debug) {
     cout << "input for fast_inp_int(): ";
   }
@@ -41,11 +37,7 @@ void fast_inp_int(
 }
 
 // Time: O(M); Space: O(1);
-void fast_inp_long_long(
-  long long& num,
-  const char& delim = ' ',
-  const bool& _debug = true
-) {
+void fast_inp_long_long(long long& num, const char& delim = ' ', const bool& _debug = true) {
   if (_debug) {
     cout << "input for fast_inp_long_long(): ";
   }
@@ -78,11 +70,7 @@ void fast_inp_long_long(
 }
 
 // Time: O(NM); Space: O(1);
-void fast_inp_vector_int(
-  vector<int>& vect,
-  const char& delim = ' ',
-  const bool& _debug = true
-) {
+void fast_inp_vector_int(vector<int>& vect, const char& delim = ' ', const bool& _debug = true) {
   if (_debug) {
     cout << "input for " << vect.size() << " values for fast_inp_vector_int(): ";
   }
@@ -101,11 +89,7 @@ void fast_inp_vector_int(
 }
 
 // Time: O(NM); Space: O(1);
-void fast_inp_vector_long_long(
-  vector<long long>& vect,
-  const char& delim = ' ',
-  const bool& _debug = true
-) {
+void fast_inp_vector_long_long(vector<long long>& vect, const char& delim = ' ', const bool& _debug = true) {
   if (_debug) {
     cout << "input for " << vect.size() << " values for fast_inp_vector_long_long(): ";
   }

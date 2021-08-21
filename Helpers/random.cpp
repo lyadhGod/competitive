@@ -5,13 +5,11 @@
 
 using namespace std;
 
-int gen_random_int(
-  const int& min = -1000000007,
-  const int& max = 1000000007,
-  const bool& _debug = false
-) {
+// generate a random integer in range [`min`, `max`]
+int gen_random_int(const int& min = -1000000007, const int& max = 1000000007, const bool& _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> distribution(min, max);
+
   int ans = distribution(engine);
 
   if (_debug) {
@@ -22,45 +20,8 @@ int gen_random_int(
   return ans;
 }
 
-long long gen_random_long_long(
-  const long long min = -1000000007LL,
-  const long long max = 1000000007LL,
-  const bool& _debug = false
-) {
-  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
-  uniform_int_distribution<long long> distribution(min, max);
-  long long ans = distribution(engine);
-
-  if (_debug) {
-    out_long_long(ans, "gen_random_long_long()");
-    cout << "\n";
-  }
-
-  return ans;
-}
-
-double gen_random_double(
-  const double min = -1000000007.0,
-  const double max = 1000000007.0,
-  const bool& _debug = false
-) {
-  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
-  uniform_real_distribution<double> distribution(min, max);
-  double ans = distribution(engine);
-
-  if (_debug) {
-    out_double(ans, "gen_random_double()");
-    cout << "\n";
-  }
-
-  return ans;
-}
-
-string gen_random_string(
-  const unsigned int& length = 10U,
-  const bool& with_space = false,
-  const bool& _debug = false
-) {
+// generate a random string with/without spaces
+string gen_random_string(const int& length = 10, const bool& with_space = false, const bool& _debug = false) {
   vector<char> char_space = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -94,12 +55,8 @@ string gen_random_string(
   return s;
 }
 
-vector<int> gen_random_vector_int(
-  const unsigned int& length = 10U,
-  const int& min = -1000000007,
-  const int& max = 1000000007,
-  const bool& _debug = false
-) {
+// generate a random integer vector of length `length` containing values in range [`min`, `max`]
+vector<int> gen_random_vector_int(const int& length = 10, const int& min = -1000000007, const int& max = 1000000007, const bool& _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> distribution(min, max);
 
@@ -118,11 +75,7 @@ vector<int> gen_random_vector_int(
   return ans;
 }
 
-unordered_map<int, vector<int>> gen_random_unweighted_graph(
-  const unsigned int& length = 10U,
-  const bool& has_forced_disconnection = false,
-  const bool& _debug = false
-) {
+unordered_map<int, vector<int>> gen_random_unweighted_graph(const unsigned int& length = 10, const bool& has_forced_disconnection = false, const bool& _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> node_distribution(0, length - 1);
   uniform_int_distribution<int> connected_distribution(0, 1);
@@ -151,13 +104,7 @@ unordered_map<int, vector<int>> gen_random_unweighted_graph(
   return graph;
 }
 
-unordered_map<int, vector<pair<int, int>>> gen_random_weighted_graph(
-  const unsigned int& length = 10U,
-  const int& min_weight = 0,
-  const int& max_weight = 10,
-  const bool& has_forced_disconnection = false,
-  const bool& _debug = false
-) {
+unordered_map<int, vector<pair<int, int>>> gen_random_weighted_graph(const int& length = 10, const int& min_weight = 0, const int& max_weight = 10, const bool& has_forced_disconnection = false, const bool& _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> node_distribution(0, length - 1);
   uniform_int_distribution<int> edge_distribution(min_weight, max_weight);
@@ -187,13 +134,8 @@ unordered_map<int, vector<pair<int, int>>> gen_random_weighted_graph(
   return graph;
 }
 
-vector<vector<int>> gen_random_matrix(
-  const unsigned int& rows = 2U,
-  const unsigned int& columns = 3U,
-  const int& min = -1000000007,
-  const int& max = 1000000007,
-  const bool& _debug = false
-) {
+// generate a random integer matrix of row count `rows` and column count `columns` containing values in range [`min`, `max`]
+vector<vector<int>> gen_random_matrix(const int& rows = 2, const unsigned int& columns = 3U, const int& min = -1000000007, const int& max = 1000000007, const bool& _debug = false) {
   default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
   uniform_int_distribution<int> distribution(min, max);
 
@@ -215,3 +157,34 @@ vector<vector<int>> gen_random_matrix(
   return ans;
 }
 
+// generate a random tree where each index is a node and it's value is it's parent
+// root node has itself as it's parent
+vector<int> gen_random_tree(const int& nodes = 10, const bool& _debug = false) {
+  default_random_engine engine(chrono::system_clock::now().time_since_epoch().count());
+  uniform_int_distribution<int> distribution(0, nodes - 1);
+
+  int i, j, k;
+
+  vector<int> ans(nodes, -1);
+
+  i = distribution(engine);
+  ans[i] = i;
+
+  for (i = 0; i < nodes; i++) {
+    if (ans[i] == -1) {
+      j = i;
+      while (ans[j] != j) {
+        while ((k = distribution(engine)) == j);
+        ans[j] = k;
+        j = k;
+      }
+    }
+  }
+
+  if (_debug) {
+    out_vector_int(ans, "gen_random_tree()");
+    cout << "\n";
+  }
+
+  return ans;
+}
