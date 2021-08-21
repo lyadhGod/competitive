@@ -15,8 +15,6 @@ class Depth {
     // TOTAL SPACE: O(N)
     // `initDepth` intializes the depth vector
     vector<int> initDepth(const vector<int>& parent) {
-      this->depth.clear();
-
       int n = parent.size();
 
       this->depth.resize(n);

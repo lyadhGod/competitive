@@ -21,8 +21,6 @@ class BinaryLift {
         // TOTAL SPACE: O(N)
         // `initDepth` intializes the depth vector
         vector<int> initDepth(const vector<int>& parent) {
-          this->depth.clear();
-
           int n = parent.size();
 
           this->depth.resize(n);
@@ -96,8 +94,6 @@ class BinaryLift {
     // TOTAL SPACE: O(NlogN) 
     // `initLifter` intializes the binary lift cache
     vector<vector<int>> initLifter(const vector<int>& parent) {
-      this->lifter.clear();
-
       this->depth.initDepth_calcDepthAll(parent);
 
       int n = this->depth.depth.size();
@@ -153,17 +149,22 @@ class BinaryLift {
       return this->lifter;
     }
 
-    // TOTAL TIME: O(N)
-    // TOTAL SPACE: O(N) 
+    // TOTAL TIME: O(N) if lifter was empty; O(NlogN) is lifter was not empty;
+    // TOTAL SPACE: O(N)
     // `initLifter` intializes the binary lift cache wihtout precalculating the max depth
     vector<vector<int>> initLifter_withoutPreCalcDepth(const vector<int>& parent) {
+      int i;
+      
+      int m = this->lifter.size();
+      for (m--; m >= 0 ; m--) {
+        this->lifter[m].clear();
+      }
       this->lifter.clear();
 
       int n = parent.size();
       
       this->lifter.resize(n);
 
-      int i;
       for (i = 0; i < n; i++) {
         if (parent[i] != i) {
           this->lifter[i].emplace_back(parent[i]);
