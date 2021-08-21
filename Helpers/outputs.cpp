@@ -4,13 +4,23 @@
 
 using namespace std;
 
-void out_int(const int value, const string& label = "") {
+// output an integer
+void out_int(const int& value, const string& label = "") {
   if (label.size() > 0) {
     cout << label << ": ";
   }
   cout << value << "\n";
 }
 
+// output a long long integer
+void out_long_long(const long long& value, const string& label = "") {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << value << "\n";
+}
+
+// output a string
 void out_string(const string& value, const string& label = "") {
   if (label.size() > 0) {
     cout << label << ": ";
@@ -18,6 +28,7 @@ void out_string(const string& value, const string& label = "") {
   cout << "\"" << value << "\"\n";
 }
 
+// output an integer vector
 void out_vector_int(const vector<int>& value, const string& label = "", const bool& with_index = false) {
   if (label.size() > 0) {
     cout << label << ": ";
@@ -39,6 +50,29 @@ void out_vector_int(const vector<int>& value, const string& label = "", const bo
   cout << "]\n";
 }
 
+// output an long long integer vector
+void out_vector_long_long(const vector<long long>& value, const string& label = "", const bool& with_index = false) {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[ ";
+
+  int i, length = value.size();
+  if (with_index) {
+    cout << "\n";
+    for (i = 0; i < length; i++) {
+      cout << "    " << i << ": " << value[i] << ",\n";
+    }
+  } else {
+    for (i = 0; i < length; i++) {
+      cout << value[i] << ", ";
+    }
+  }
+
+  cout << "]\n";
+}
+
+// output a string vector
 void out_vector_string(const vector<string>& value, const string& label = "") {
   if (label.size() > 0) {
     cout << label << ": ";
@@ -53,6 +87,7 @@ void out_vector_string(const vector<string>& value, const string& label = "") {
   cout << "]\n";
 }
 
+// output an integer matrix
 void out_matrix_int(const vector<vector<int>>& value, const string& label = "") {
   if (label.size() > 0) {
     cout << label << ": ";

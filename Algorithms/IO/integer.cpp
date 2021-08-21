@@ -2,7 +2,7 @@
 #include "../../Helpers/helpers.h"
 
 using namespace std;
-
+ 
 // Time: O(M); Space: O(1);
 void fast_inp_int(int& num, const char& delim = ' ', const bool& _debug = true) {
   if (_debug) {
