@@ -186,12 +186,12 @@ class BinaryLift {
       while (q) {
         q = false;
         for (i = 0; i < n; i++) {
-          if (this->lifter[i].size() <= j) {
+          if (this->lifter[i].size() == j) {
             k = this->lifter[i][j - 1];
-            if (this->lifter[k].size() <= j) {
+            if (this->lifter[k].size() == j) {
               p = this->lifter[k][j - 1];
 
-              this->lifter[i][j] = p;
+              this->lifter[i].emplace_back(p);
 
               q = true;
             }
@@ -220,10 +220,10 @@ int main() {
   auto binaryLift = BinaryLift();
 
   auto initLifter_caclLifter = binaryLift.initLifter_caclLifter(parent);
-  out_matrix_int(initLifter_caclLifter, "BinaryLift.initLifter_caclLifter()");
+  out_unweighted_graph(initLifter_caclLifter, "BinaryLift.initLifter_caclLifter()");
 
   auto initLifter_caclLifter_withoutPreCalcDepth = binaryLift.initLifter_caclLifter_withoutPreCalcDepth(parent);
-  out_matrix_int(initLifter_caclLifter_withoutPreCalcDepth, "BinaryLift.initLifter_caclLifter_withoutPreCalcDepth()");
+  out_unweighted_graph(initLifter_caclLifter_withoutPreCalcDepth, "BinaryLift.initLifter_caclLifter_withoutPreCalcDepth()");
 
   return 0;
 }

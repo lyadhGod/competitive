@@ -118,46 +118,46 @@ void out_unweighted_graph(const vector<vector<int>>& value, const string& label 
   if (label.size() > 0) {
     cout << label << ": ";
   }
-  cout << "{\n";
+  cout << "[\n";
 
   int n = value.size();
 
   int count, j, i;
   for (i = 0; i != n; i++) {
-    cout << "    (" << i << ")";
+    cout << "    " << i << ": [ ";
 
     count = value[i].size();
     for (j = 0; j < count; j++) {
-      cout << " -> " << value[i][j];
+      cout << value[i][j] << ", ";
     }
 
-    cout << "\n";
+    cout << "]\n";
   }
 
-  cout << "}\n";
+  cout << "]\n";
 }
 
 void out_weighted_graph(const unordered_map<int, vector<pair<int, int>>>& value, const string& label = "") {
   if (label.size() > 0) {
     cout << label << ": ";
   }
-  cout << "{\n";
+  cout << "[\n";
 
   int count, j;
   unordered_map<int, vector<pair<int, int>>>::const_iterator begin_i = value.begin(), end_i = value.end();
   unordered_map<int, vector<pair<int, int>>>::const_iterator itr;
   for (itr = begin_i; itr != end_i; itr++) {
-    cout << "    (" << itr->first << ")";
+    cout << "    " << itr->first << ": [ ";
 
     count = itr->second.size();
     for (j = 0; j < count; j++) {
-      cout << " -> [" << itr->second[j].first << ", " << itr->second[j].second << "]";
+      cout << "(" << itr->second[j].first << ", " << itr->second[j].second << "), ";
     }
 
-    cout << "\n";
+    cout << "]\n";
   }
 
-  cout << "}\n";
+  cout << "]\n";
 }
 
 void out_transtion_char_char(const vector<pair<char, char>>& value, const string& label = "") {
