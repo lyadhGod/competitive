@@ -64,90 +64,69 @@
 
 using namespace std;
 
-// `Input` is a class to deal with fast integer inputting
-class Input {
-  public:
-    // TOTAL TIME: O(M) 
-    // TOTAL SPACE: O(1) 
-    // `fast_inp_int` inputs int value into num
-    void fast_inp_int(int& num, const char& delim = ' ') {
-      bool negative = false;
-      int c;
-
-      c = getchar();
-      while (c == delim) {
-          c = getchar();
-      };
-      if (c == '-') {
-          negative = true;
-          c = getchar();
-      }
-
-      num = 0;
-      for (; (c > 47 && c < 58); c = getchar()) {
-          num = (num << 3) + (num << 1) + (c - 48);
-      }
-
-      if (negative) {
-          num *= -1;
-      }
-    }
-
-    // TOTAL TIME: O(M) 
-    // TOTAL SPACE: O(1) 
-    // `fast_inp_long_long` inputs long long value into num
-    void fast_inp_long_long(long long& num, const char& delim = ' ') {
-      bool negative = false;
-      register int c;
-
-      c = getchar();
-      while (c == delim) {
-          c = getchar();
-      };
-      if (c == '-') {
-          negative = true;
-          c = getchar();
-      }
-
-      num = 0LL;
-      for (; (c > 47 && c < 58); c = getchar()) {
-          num = (num << 3) + (num << 1) + (c - 48);
-      }
-
-      if (negative) {
-          num *= -1;
-      }
-    }
-
-    // TOTAL TIME: O(NM) 
-    // TOTAL SPACE: O(N) 
-    // `fast_inp_vector_int` inputs int vector into vect
-    void fast_inp_vector_int(vector<int>& vect, const char& delim = ' ') {
-      int n = vect.size();
-
-      int i;
-      for (i = 0; i < n; i++) {
-        fast_inp_int(vect[i], delim);
-      }
-    }
-
-    // TOTAL TIME: O(NM) 
-    // TOTAL SPACE: O(N) 
-    // `fast_inp_vector_long_long` inputs long long vector into vect
-    void fast_inp_vector_long_long(vector<long long>& vect, const char& delim = ' ') {
-      int n = vect.size();
-
-      int i;
-      for (i = 0; i < n; i++) {
-        fast_inp_long_long(vect[i], delim);
-      }
-    }
-};
-
-void solve(const Input& input, const int& o) {
+int solve(const int& o, const int& n, const int& m, vector<string>& v) {
     int i, j, k, x, y, z;
 
-    
+    z = 0;
+    k = -1;
+    while (k != z) {
+        k = z;
+        FO (i, n) {
+            j = 0;
+            while (j < m) {
+                while (j < m && v[i][j] == '#') j++;
+                if (j == m) break;
+                x = j;
+
+                while (j < m && v[i][j] != '#') j++;
+                y = j - 1;
+
+
+                while (x < y) {
+                    if (v[i][x] == '.' && v[i][y] != '.') v[i][x] = v[i][y], z++;
+                    else if (v[i][x] != '.' && v[i][y] == '.') v[i][y] = v[i][x], z++;
+                    x++;
+                    y--;
+                }
+            }
+        }
+
+        FO (j, m) {
+            i = 0;
+            while (i < n) {
+                while (i < n && v[i][j] == '#') i++;
+                if (i == n) break;
+                x = i;
+
+                while (i < n && v[i][j] != '#') i++;
+                y = i - 1;
+
+                while (x < y) {
+                    if (v[x][j] == '.' && v[y][j] != '.') v[x][j] = v[y][j], z++;
+                    else if (v[x][j] != '.' && v[y][j] == '.') v[y][j] = v[x][j], z++;
+                    x++;
+                    y--;
+                }
+            }
+        }
+    }
+
+    return z;
+}
+
+int comp(const int& n, const int& m, const vector<string>& g, const vector<string>& v) {
+    int i, j, k, x, y, z;
+
+    z = 0;
+    FO (i, n) {
+        FO (j, m) {
+            if (g[i][j] != v[i][j]) {
+                z++;
+            }
+        }
+    }
+
+    return z;
 }
 
 int main() {
@@ -155,14 +134,29 @@ int main() {
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    Input input;
-
     int t;
-    input.fast_inp_int(t);  
+    cin >> t;
 
-    int o;
+    int n, m;
+    vector<string> v;
+
+    int z, i;
+
+    int o, g;
     FOA(o, 1, t + 1) {
-        solve(input, o);
+        cin >> n >> m;
+
+        v.resize(n);
+        FO (g, n) {
+            cin >> v[g];
+        }  
+
+        z = solve(o, n, m, v);
+
+        cout << "Case #" << o << ": " << z << "\n";
+        FO (i, n) {
+            cout << v[i] << "\n";
+        }
     }
 
     return 0;

@@ -64,90 +64,44 @@
 
 using namespace std;
 
-// `Input` is a class to deal with fast integer inputting
-class Input {
-  public:
-    // TOTAL TIME: O(M) 
-    // TOTAL SPACE: O(1) 
-    // `fast_inp_int` inputs int value into num
-    void fast_inp_int(int& num, const char& delim = ' ') {
-      bool negative = false;
-      int c;
-
-      c = getchar();
-      while (c == delim) {
-          c = getchar();
-      };
-      if (c == '-') {
-          negative = true;
-          c = getchar();
-      }
-
-      num = 0;
-      for (; (c > 47 && c < 58); c = getchar()) {
-          num = (num << 3) + (num << 1) + (c - 48);
-      }
-
-      if (negative) {
-          num *= -1;
-      }
-    }
-
-    // TOTAL TIME: O(M) 
-    // TOTAL SPACE: O(1) 
-    // `fast_inp_long_long` inputs long long value into num
-    void fast_inp_long_long(long long& num, const char& delim = ' ') {
-      bool negative = false;
-      register int c;
-
-      c = getchar();
-      while (c == delim) {
-          c = getchar();
-      };
-      if (c == '-') {
-          negative = true;
-          c = getchar();
-      }
-
-      num = 0LL;
-      for (; (c > 47 && c < 58); c = getchar()) {
-          num = (num << 3) + (num << 1) + (c - 48);
-      }
-
-      if (negative) {
-          num *= -1;
-      }
-    }
-
-    // TOTAL TIME: O(NM) 
-    // TOTAL SPACE: O(N) 
-    // `fast_inp_vector_int` inputs int vector into vect
-    void fast_inp_vector_int(vector<int>& vect, const char& delim = ' ') {
-      int n = vect.size();
-
-      int i;
-      for (i = 0; i < n; i++) {
-        fast_inp_int(vect[i], delim);
-      }
-    }
-
-    // TOTAL TIME: O(NM) 
-    // TOTAL SPACE: O(N) 
-    // `fast_inp_vector_long_long` inputs long long vector into vect
-    void fast_inp_vector_long_long(vector<long long>& vect, const char& delim = ' ') {
-      int n = vect.size();
-
-      int i;
-      for (i = 0; i < n; i++) {
-        fast_inp_long_long(vect[i], delim);
-      }
-    }
-};
-
-void solve(const Input& input, const int& o) {
+string solve(const int& o, const string& s) {
     int i, j, k, x, y, z;
 
-    
+    int w = 'z' - 'a' + 1;
+    V(int) v(w, 0);
+
+    for (auto p: s) {
+        v[p - 'a']++;
+    }
+
+    int h = s.size();
+    int d = h >> 1;
+
+    for (auto p: v) {
+        if (p > d) {
+            return "IMPOSSIBLE";
+        }
+    }
+
+    string a(h, ' ');
+    FO (i, h) {
+        x = s[i] - 'a';
+        j = (x + 1) % w;
+        while (v[j] == 0) j = (j + 1) % w;
+        a[i] = j + 'a';
+        v[j]--;
+    }
+    FO (i, h) {
+        if (a[i] == s[i]) {
+            FO (j, h) {
+                if (i != j && a[j] != s[i] && a[i] != s[j]) {
+                    swap(a[i], a[j]);
+                }
+            }
+        }
+    }
+
+    return a;
 }
 
 int main() {
@@ -155,14 +109,16 @@ int main() {
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    Input input;
-
     int t;
-    input.fast_inp_int(t);  
+    cin >> t;
+
+    string s, p;
 
     int o;
     FOA(o, 1, t + 1) {
-        solve(input, o);
+        cin >> s;
+        p = solve(o, s);
+        cout << "Case #" << o << ": " << p << "\n";
     }
 
     return 0;

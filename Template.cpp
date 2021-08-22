@@ -41,9 +41,9 @@
 #define IL(t) list<t>::iterator
 #define IFL(t) forward_list<t>::iterator
 #define IS(t) set<t>::iterator
-#define ISCMP(t) set<t, cmp>::iterator
+#define ISCMP(t, cmp) set<t, cmp>::iterator
 #define IMS(t) multiset<t>::iterator
-#define IMSCMP(t) multiset<t, cmp>::iterator
+#define IMSCMP(t, cmp) multiset<t, cmp>::iterator
 #define IM(k, v) map<k, v>::iterator
 #define IMCMP(k, v, cmp) map<k, v, cmp>::iterator
 #define IMM(k, v) multimap<k, v>::iterator
