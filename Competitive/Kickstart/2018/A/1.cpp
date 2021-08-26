@@ -24,7 +24,7 @@ int main() {
 
         if(last == 0) count = 0;
         else {
-            down = (inp * last * last / base)  
+            down = (inp * last * last / base)  ;
         }
         
         cout << "Case #" << t << ": " << count << endl;
