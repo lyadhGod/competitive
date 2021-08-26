@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 #define FO(i, n) for(i = 0; i < n; i++)
 #define FOA(i, a, n) for(i = a; i < n; i++)
@@ -64,89 +64,7 @@
 
 using namespace std;
 
-// `Input` is a class to deal with fast integer inputting
-class Input {
-  public:
-    // TOTAL TIME: O(M) 
-    // TOTAL SPACE: O(1) 
-    // `fast_inp_int` inputs int value into num
-    void fast_inp_int(int& num, const char& delim = ' ') {
-      bool negative = false;
-      int c;
-
-      c = getchar();
-      while (c == delim) {
-          c = getchar();
-      };
-      if (c == '-') {
-          negative = true;
-          c = getchar();
-      }
-
-      num = 0;
-      for (; (c > 47 && c < 58); c = getchar()) {
-          num = (num << 3) + (num << 1) + (c - 48);
-      }
-
-      if (negative) {
-          num *= -1;
-      }
-    }
-
-    // TOTAL TIME: O(M) 
-    // TOTAL SPACE: O(1) 
-    // `fast_inp_long_long` inputs long long value into num
-    void fast_inp_long_long(long long& num, const char& delim = ' ') {
-      bool negative = false;
-      register int c;
-
-      c = getchar();
-      while (c == delim) {
-          c = getchar();
-      };
-      if (c == '-') {
-          negative = true;
-          c = getchar();
-      }
-
-      num = 0LL;
-      for (; (c > 47 && c < 58); c = getchar()) {
-          num = (num << 3) + (num << 1) + (c - 48);
-      }
-
-      if (negative) {
-          num *= -1;
-      }
-    }
-
-    // TOTAL TIME: O(NM) 
-    // TOTAL SPACE: O(N) 
-    // `fast_inp_vector_int` inputs int vector into vect
-    void fast_inp_vector_int(vector<int>& vect, const char& delim = ' ') {
-      int n = vect.size();
-
-      int i;
-      for (i = 0; i < n; i++) {
-        fast_inp_int(vect[i], delim);
-      }
-    }
-
-    // TOTAL TIME: O(NM) 
-    // TOTAL SPACE: O(N) 
-    // `fast_inp_vector_long_long` inputs long long vector into vect
-    void fast_inp_vector_long_long(vector<long long>& vect, const char& delim = ' ') {
-      int n = vect.size();
-
-      int i;
-      for (i = 0; i < n; i++) {
-        fast_inp_long_long(vect[i], delim);
-      }
-    }
-};
-
-void solve(const Input& input, const int& o) {
-    int i, j, k, x, y, z;
-
+void solve(const int& o) {
     
 }
 
@@ -155,14 +73,12 @@ int main() {
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    Input input;
-
     int t;
-    input.fast_inp_int(t);  
+    cin >> t;  
 
     int o;
     FOA(o, 1, t + 1) {
-        solve(input, o);
+        solve(o);
     }
 
     return 0;
