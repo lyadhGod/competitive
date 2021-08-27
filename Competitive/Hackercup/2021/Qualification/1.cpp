@@ -64,8 +64,49 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+int solve(const int& o, const string& s) {
+    int n = s.size();
+
+    int i;
+
+    int m = 'Z' - 'A' + 1;
+    V(int) v(m, 0);
+
+    int count_v = 0, count_co = 0;
+    int max_v = INT_MIN, max_co = INT_MIN;
+    FO(i, n) {
+        v[s[i] - 'A']++;
+
+        switch (s[i]) {
+            case 'A': case 'E': case 'I': case 'O': case 'U':
+                count_v++;
+                if (v[s[i] - 'A'] > max_v) max_v = v[s[i] - 'A'];
+                break;
+            default:
+                count_co++;
+                if (v[s[i] - 'A'] > max_co) max_co = v[s[i] - 'A'];
+        }
+    }
+
+    int max_a = max(max_v, max_co);
+    if (max_a == n) return 0;
+
+    int p = INT_MAX, d;
+    char ch;
+    FO(i, m) {
+        ch = i + 'A';
+        switch(ch) {
+            case 'A': case 'E': case 'I': case 'O': case 'U':
+                d = count_co + (2 * (count_v - v[i]));
+                break;
+            default:
+                d = count_v + (2 * (count_co - v[i]));
+        }
+
+        if (d < p) p = d;
+    }
+
+    return p;
 }
 
 int main() {
@@ -78,9 +119,15 @@ int main() {
 
     int ans;
 
+    string s;
+
     int o;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> s;
+
+        ans = solve(o, s);
+
+        cout << "Case #" << o << ": " << ans << "\n";
     }
 
     return 0;
