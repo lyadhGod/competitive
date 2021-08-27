@@ -64,7 +64,7 @@
 
 using namespace std;
 
-void solve(const int& o) {
+int solve(const int& o) {
     
 }
 
@@ -74,11 +74,13 @@ int main() {
     cout.tie(nullptr);
 
     int t;
-    cin >> t;  
+    cin >> t;
+
+    int ans;
 
     int o;
     FOA(o, 1, t + 1) {
-        solve(o);
+        ans = solve(o);
     }
 
     return 0;

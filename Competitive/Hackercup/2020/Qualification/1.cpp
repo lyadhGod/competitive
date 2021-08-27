@@ -64,8 +64,30 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+V(V(bool)) solve(const int& o, const int& n, const string& in, const string& out) {
+    int i, j, k, m;
+
+    V(V(bool)) v(n, V(bool)(n, false));
+
+    FO(i, n) {
+      v[i][i] = true;
+    }
+
+    m = n - 1;
+    FO(i, m) {
+      v[i][i + 1] = out[i] == 'Y' && in[i + 1] == 'Y';
+      v[i + 1][i] = out[i + 1] == 'Y' && in[i] == 'Y';
+    }
+
+    FOA(j, 2, n) {
+      m = n - j;
+      FO(i, m) {
+        v[i][i + j] = v[i][i + j - 1] && v[i + 1][i + j];
+        v[i + j][i] = v[i + j - 1][i] && v[i + j][i + 1];
+      }
+    }
+
+    return v;
 }
 
 int main() {
@@ -76,11 +98,29 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    int n;
+    string in, out;
+
+    V(V(bool)) v;
+
+    int i, j, m;
 
     int o;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+      cin >> n;
+      cin >> in;
+      cin >> out;
+
+      v = solve(o, n, in, out);
+
+      cout << "Case #" << o << ":\n";
+      m = v.size();
+      FO(i, m) {
+        FO(j, m) {
+          cout << (v[i][j] ? 'Y' : 'N');
+        }
+        cout << '\n';
+      }
     }
 
     return 0;

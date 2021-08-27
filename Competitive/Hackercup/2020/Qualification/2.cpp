@@ -64,8 +64,19 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+char solve(const int& o ,const int& n, const string& s) {
+    int a = 0, b = 0;
+
+    int i;
+    FO(i, n) {
+        if (s[i] == 'A') a++;
+        else b++;
+    }
+
+    int m = a - b;
+    if (-1 <= m && m <= 1) return 'Y';
+
+    return 'N';
 }
 
 int main() {
@@ -76,11 +87,19 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    int n;
+    string s;
+
+    char ans;
 
     int o;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> n;
+        cin >> s;
+
+        ans = solve(o, n, s);
+
+        cout << "Case #" << o << ": " << ans << "\n";
     }
 
     return 0;
