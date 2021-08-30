@@ -64,8 +64,112 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+void out_unweighted_graph(const vector<vector<long long>>& value, const string& label = "") {
+  if (label.size() > 0) {
+    cout << label << ": ";
+  }
+  cout << "[\n";
+
+  int n = value.size();
+
+  int count, j, i;
+  for (i = 0; i != n; i++) {
+    cout << "    " << i << ": [ ";
+
+    count = value[i].size();
+    for (j = 0; j < count; j++) {
+      cout << value[i][j] << ", ";
+    }
+
+    cout << "]\n";
+  }
+
+  cout << "]\n";
+}
+
+void decompose(const int& i, V(V(int))& g, V(long long)& w, V(bool)& v) {
+    v[i] = true;
+
+    int k, j, p, m, d;
+    int n = g[i].size();
+    FO(k, n) {
+        j = g[i][k];
+
+        if (v[j] == true) continue;
+
+        decompose(j, g, w, v);
+
+        if (g[j].size() == 2) {
+            p = (g[j][0] == i) ? g[j][1] : g[j][0];
+
+            w[p] += w[j];
+            
+            d = g[p].size();
+            FO(m, d) {
+                if (g[p][m] == j) {
+                    g[p][m] = i;
+                    break;
+                }
+            }
+
+            g[i][k] = p;
+
+            g[j].clear();
+        }
+    }
+}
+
+long long work(const int& i, const V(V(int))& g, const V(long long)& w, V(bool)& v, V(V(long long))& mat, const int& k) {
+    if (v[i] == true) return 0LL;
+
+    if (mat[i][k] > 0LL) return 0LL;
+
+    if (k == 0) {
+        mat[i][k] = w[i];
+        return mat[i][k];
+    }
+
+    v[i] = true;
+
+    int n = g[i].size();
+
+    V(int) se(n);
+
+    int m, j, p;
+    long long q, d = 0LL;
+    FO(m, k + 1) {
+        FO(j, n) {
+            se[j] = work(g[i][j], g, w, v, mat, m);
+        }
+
+        sort(se.begin(), se.end(), GT(long long));
+
+        p = m;
+        q = 0LL;
+        FO(j, n) {
+            q += se[j];
+            if (j & 1 == 0) p--;
+            if (q < 0) break;
+        }
+        q += w[i];
+
+        mat[i][m] = max(mat[i][m], q);
+
+        d = max(d, mat[i][m]);
+    }
+
+    return d;
+}
+
+long long solve(const int& o, const int& n, const int& k, V(long long)& w, V(V(int))& g) {    
+    V(bool) v(n, false);
+    decompose(0, g, w, v);
+
+    fill(v.begin(), v.end(), false);
+    V(V(long long)) mat(n, V(long long)(k + 1, 0LL));
+    work(0, g, w, v, mat, k);
+
+    return mat[0][k];
 }
 
 int main() {
@@ -76,11 +180,33 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    long long ans;
 
-    int o;
+    int n, k;
+    V(long long) w;
+    V(V(int)) g;
+
+    int o, i, a, b;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> n >> k;
+
+        w.clear();
+        w.resize(n);
+        FO(i, n) {
+            cin >> w[i];
+        } 
+
+        g.clear();
+        g.resize(n);
+        FO(i, n - 1) {
+            cin >> a >> b;
+            if (find(g[a - 1].begin(), g[a - 1].end(), b - 1) == g[a - 1].end()) g[a - 1].emplace_back(b - 1);
+            if (find(g[b - 1].begin(), g[b - 1].end(), a - 1) == g[b - 1].end()) g[b - 1].emplace_back(a - 1);
+        }
+
+        ans = solve(o, n, k, w, g);
+
+        cout << "Case #" << o << ": " << ans << "\n";
     }
 
     return 0;

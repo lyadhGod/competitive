@@ -64,8 +64,79 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+void decompose(const int& i, V(V(int))& g, V(long long)& w, V(bool)& v) {
+    v[i] = true;
+
+    int k, j, p, m, d;
+    int n = g[i].size();
+    FO(k, n) {
+        j = g[i][k];
+
+        if (v[j] == true) continue;
+
+        decompose(j, g, w, v);
+
+        if (g[j].size() == 2) {
+            p = (g[j][0] == i) ? g[j][1] : g[j][0];
+
+            w[p] += w[j];
+            
+            d = g[p].size();
+            FO(m, d) {
+                if (g[p][m] == j) {
+                    g[p][m] = i;
+                    break;
+                }
+            }
+
+            g[i][k] = p;
+
+            g[j].clear();
+        }
+    }
+}
+
+long long work(const int& i, const V(V(int))& g, const V(long long)& w, V(bool)& v, const int& s) {
+    if (v[i] == true) return 0L;
+
+    v[i] = true;
+
+    int n = g[i].size();
+
+    V(long long) m(n);
+
+    int j;
+    FO(j, n) {
+        m[j] = work(g[i][j], g, w, v, s);
+    }
+
+    auto c = max_element(m.begin(), m.end());
+    long long q = (c == m.end()) ? 0L : *c;
+
+    if (i == s && n > 1) {
+        FO(j, n) {
+            if (m[j] == q) {
+                m[j] = 0L;
+                break;
+            }
+        }
+        c = max_element(m.begin(), m.end());
+        q += (c == m.end()) ? 0L : *c;
+    }
+
+    q += w[i];
+
+    return q;
+}
+
+long long solve(const int& o, const int& n, V(long long)& w, V(V(int))& g) {    
+    V(bool) v(n, false);
+    decompose(0, g, w, v);
+
+    fill(v.begin(), v.end(), false);
+    long long p = work(0, g, w, v, 0);
+
+    return p;
 }
 
 int main() {
@@ -76,11 +147,33 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    long long ans;
 
-    int o;
+    int n;
+    V(long long) w;
+    V(V(int)) g;
+
+    int o, i, a, b;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> n;
+
+        w.clear();
+        w.resize(n);
+        FO(i, n) {
+            cin >> w[i];
+        } 
+
+        g.clear();
+        g.resize(n);
+        FO(i, n - 1) {
+            cin >> a >> b;
+            if (find(g[a - 1].begin(), g[a - 1].end(), b - 1) == g[a - 1].end()) g[a - 1].emplace_back(b - 1);
+            if (find(g[b - 1].begin(), g[b - 1].end(), a - 1) == g[b - 1].end()) g[b - 1].emplace_back(a - 1);
+        }
+
+        ans = solve(o, n, w, g);
+
+        cout << "Case #" << o << ": " << ans << "\n";
     }
 
     return 0;

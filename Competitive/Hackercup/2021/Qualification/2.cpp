@@ -64,8 +64,66 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+int solve(const int& o, const string& s, const int& q, const V(string)& p) {
+    int n = s.size();
+
+    int i;
+
+    int m = 'Z' - 'A' + 1;
+    V(int) v(m, 0);
+
+    int max_a = INT_MIN;
+    FO(i, n) {
+        v[s[i] - 'A']++;
+
+        if (v[s[i] - 'A'] > max_a) max_a = v[s[i] - 'A'];
+    }
+    if (max_a == n) return 0;
+
+    V(V(int)) k(m, V(int)(m, INT_MAX));
+    FO(i, m) {
+        k[i][i] = 0;
+    }
+    FO(i, q) {
+        k[p[i][0] - 'A'][p[i][1] - 'A'] = 1;
+    }
+
+    int j, d;
+    FO(d, m) {
+        FO(i, m) {
+            if (i == d) continue;
+
+            FO(j, m) {
+                if (d == j || i == j) continue;
+
+                if (k[i][d] == INT_MAX || k[d][j] == INT_MAX) continue;
+                
+                if (k[i][d] + k[d][j] < k[i][j]) k[i][j] = k[i][d] + k[d][j];
+            }
+        }
+    }
+
+    int a, w = INT_MAX;
+    FO(i, m) {
+        a = 0;
+        FO(j, m) {
+            if (i == j) continue;
+
+            if (v[j] == 0) continue;
+
+            if (k[j][i] == INT_MAX) {
+                a = 0;
+                break;
+            }
+
+            a += v[j] * k[j][i];
+        }
+        if (a > 0 && a < w) w = a;
+    }
+
+    if (w == INT_MAX) w = -1;
+
+    return w;
 }
 
 int main() {
@@ -78,9 +136,26 @@ int main() {
 
     int ans;
 
-    int o;
+    string s;
+
+    int q;
+
+    V(string) p;
+
+    int o, r;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> s;
+        
+        cin >> q;
+
+        p.resize(q);
+        FO(r, q) {
+            cin >> p[r];
+        }
+
+        ans = solve(o, s, q, p);
+
+        cout << "Case #" << o << ": " << ans << "\n";
     }
 
     return 0;

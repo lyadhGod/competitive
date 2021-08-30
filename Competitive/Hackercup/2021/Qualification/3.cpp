@@ -64,8 +64,71 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+P(int, int) solve(const int& o, const int& n, const V(string)& mat) {
+    int i, j;
+
+    int s;
+    int m = INT_MAX;
+
+    V(int) v1(n), v2(n);
+
+    FO(i, n) {
+        s = 0;
+        FO(j, n) {
+            if (mat[i][j] == 'O') {
+                s = 0;
+                break;
+            }
+
+            if (mat[i][j] == '.') {
+                s++;
+            }
+        }
+        v1[i] = s;
+
+        if (s > 0 && s < m) m = s;
+    }
+
+    FO(j, n) {
+        s = 0;
+        FO(i, n) {
+            if (mat[i][j] == 'O') {
+                s = 0;
+                break;
+            }
+
+            if (mat[i][j] == '.') {
+                s++;
+            }
+        }
+        v2[j] = s;
+
+        if (s > 0 && s < m) m = s;
+    }
+
+    if (m == INT_MAX) return make_pair(-1, -1);
+
+    int c = 0;
+    FO(i, n) {
+        if (v1[i] == m) c++;
+    }
+
+    FO(j, n) {
+        if (v2[j] == m) {
+            if (m > 1) c++;
+            else {
+                FO(i, n) {
+                    if (mat[i][j] == '.') {
+                        if (v1[i] == 1) break;
+
+                        c++;
+                    }
+                }
+            }
+        }
+    }
+
+    return make_pair(m, c);
 }
 
 int main() {
@@ -76,11 +139,26 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    int n;
+    V(string) mat;
 
-    int o;
+    P(int, int) ans;
+
+    int o, i;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> n;
+
+        mat.resize(n);
+        FO(i, n) {
+            cin >> mat[i];
+        }
+
+        ans = solve(o, n, mat);
+
+        cout << "Case #" << o << ": ";
+        if (ans.first == -1) cout << "Impossible";
+        else cout << ans.first << " " << ans.second;
+        cout << "\n";
     }
 
     return 0;
