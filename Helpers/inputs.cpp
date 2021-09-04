@@ -7,7 +7,7 @@
 using namespace std;
 
 // input an integer in range [`min`, `max`]
-int inp_int(const string& label, const int& min = -1000000007, const int& max = 1000000007, const bool& _dummy = true) {
+int inp_int(const string& label,  const bool& _dummy = true, const int& min = -1000000007, const int& max = 1000000007) {
   int s;
 
   cout << label << ": ";
@@ -22,7 +22,7 @@ int inp_int(const string& label, const int& min = -1000000007, const int& max = 
 }
 
 // input a string with/without spaces
-string inp_string(const string& label, const bool& with_space = false, const bool& _dummy = true) {
+string inp_string(const string& label, const bool& _dummy = true, const bool& with_space = false) {
   string s;
 
   cout << label << ": ";
@@ -41,7 +41,7 @@ string inp_string(const string& label, const bool& with_space = false, const boo
 }
 
 // input an integer vector of length `length` containing values in range [`min`, `max`]
-vector<int> inp_vector_int(const string& label, const int& length = 10, const int& min = -1000000007, const int& max = 1000000007, const bool& _dummy = true) {
+vector<int> inp_vector_int(const string& label, const bool& _dummy = true, const int& length = 10, const int& min = -1000000007, const int& max = 1000000007) {
   vector<int> s;
 
   cout << label << ": ";
@@ -68,7 +68,7 @@ vector<int> inp_vector_int(const string& label, const int& length = 10, const in
 }
 
 // input an unweighted as vector of vectors where each index is a node and it's value is a vector of linked nodes
-vector<vector<int>> inp_graph_unweighted(const string& label, const unsigned int& length = 10U, const bool& _dummy = true) {
+vector<vector<int>> inp_graph_unweighted(const string& label, const bool& _dummy = true, const int& length = 10) {
   vector<vector<int>> graph;
 
   cout << label << ":\n";
@@ -134,7 +134,7 @@ vector<vector<int>> inp_graph_unweighted(const string& label, const unsigned int
 }
 
 // input an integer vector of row count `rows` and column count `columns` containing values in range [`min`, `max`]
-vector<vector<int>> inp_matrix_int(const string& label, const int& rows = 2, const int& columns = 3, const int& min = -1000000007, const int& max = 1000000007, const bool& _dummy = true) {
+vector<vector<int>> inp_matrix_int(const string& label, const bool& _dummy = true, const int& rows = 2, const int& columns = 3, const int& min = -1000000007, const int& max = 1000000007) {
   vector<vector<int>> s;
 
   cout << label << ": ";
@@ -171,7 +171,7 @@ vector<vector<int>> inp_matrix_int(const string& label, const int& rows = 2, con
 
 // input a tree as vector where each index is a node and it's value is it's parent
 // root node has itself as it's parent
-vector<int> inp_tree(const string& label, const int& nodes = 10, const bool& _dummy = true) {
+vector<int> inp_tree(const string& label, const bool& _dummy = true, const int& nodes = 10) {
   vector<int> inp;
 
   cout << label << ": ";

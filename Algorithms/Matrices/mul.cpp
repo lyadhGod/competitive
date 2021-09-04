@@ -54,8 +54,8 @@ vector<vector<int>> mul(
 }
 
 int main() {
-  vector<vector<int>> a = inp_matrix_int("a", 2U, 3U, -10, 10);
-  vector<vector<int>> b = inp_matrix_int("b", 3U, 2U, -10, 10);
+  vector<vector<int>> a = inp_matrix_int("a", true, 2, 3, -10, 10);
+  vector<vector<int>> b = inp_matrix_int("b", true, 3, 2, -10, 10);
 
   mul(a, b);
 

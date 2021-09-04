@@ -118,8 +118,8 @@ int mod_mul(
 }
 
 int main() {
-  int a = inp_int("a", -10, 10);
-  int b = inp_int("b", -10, 10);
+  int a = inp_int("a", true, -10, 10);
+  int b = inp_int("b", true, -10, 10);
   unsigned int mod = 1000000007;
 
   mod_add(a, b, mod);

@@ -105,8 +105,8 @@ vector<vector<int>> pow_mat(
 }
 
 int main() {
-  vector<vector<int>> mat = inp_matrix_int("mat", 2U, 2U, -10, 10);
-  unsigned int exp_int = inp_int("exp", 0, 4);
+  vector<vector<int>> mat = inp_matrix_int("mat", true, 2, 2, -10, 10);
+  unsigned int exp_int = inp_int("exp", true, 0, 4);
 
   pow_mat(mat, exp_int);
 

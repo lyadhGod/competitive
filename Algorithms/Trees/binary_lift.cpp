@@ -3,26 +3,51 @@
 
 using namespace std;
 
-// `BinaryLift` is a class to deal with logarithmic calculations of node-ancestor related problems
-// `parent` is a tree as vector where each index is a node and it's value is it's parent
-// root node has itself as it's parent
+/**
+ *  `BinaryLift` is a class to deal with logarithmic calculations of node-ancestor related problems
+ *
+ * `Depth` class is coming from /Trees/depth.cpp#Depth
+ * `depth` is a Depth type member which deals with depth calculations
+ 
+ * `lifter` is a vector of lists as vectors which deals with binary lift caching
+ *
+ * `parent` is a tree as vector where each index is a node and it's value is it's parent
+ * root node has itself as it's parent
+ *
+ * `initLifter` intializes the binary lift cache
+ * TOTAL TIME: O(NlogN) 
+ * TOTAL SPACE: O(NlogN) 
+ *
+ * `caclLifter` calculates the binary lift cache considering that lifter is initialized
+ * TOTAL TIME: O(NlogN) 
+ * TOTAL SPACE: O(NlogN) 
+ *
+ * `initLifter_caclLifter` populates the binary lift cache
+ * TOTAL TIME: O(NlogN) 
+ * TOTAL SPACE: O(NlogN) 
+ *
+ * `initLifter` intializes the binary lift cache wihtout precalculating the max depth
+ * TOTAL TIME: O(N) if lifter was empty; O(NlogN) is lifter was not empty;
+ * TOTAL SPACE: O(N)
+ *
+ * `caclLifter_withoutPreCalcDepth` calculates the binary lift cache wihtout precalculating the max depth
+ * TOTAL TIME: O(NlogN) 
+ * TOTAL SPACE: O(NlogN) 
+ *
+ * `initLifter_caclLifter` populates the binary lift cache wihtout precalculating the max depth
+ * TOTAL TIME: O(NlogN) 
+ * TOTAL SPACE: O(NlogN) 
+ */
 class BinaryLift {
   public:
-    // FROM /Trees/depth.cpp#Depth
-    // `Depth` is a class to deal with node's depth calculation in a given tree
-    // `parent` is a tree as vector where each index is a node and it's value is it's parent
-    // root node has itself as it's parent
     class Depth {
       public:
-        // `depth` is a vector where each index is a node and it's value is it's distance from the root of tree in `parent`
         vector<int> depth;
 
-        // TOTAL TIME: O(N)
-        // TOTAL SPACE: O(N)
-        // `initDepth` intializes the depth vector
         vector<int> initDepth(const vector<int>& parent) {
           int n = parent.size();
 
+          this->depth.clear();
           this->depth.resize(n);
 
           int i;
@@ -33,9 +58,6 @@ class BinaryLift {
           return this->depth;
         }
 
-        // TOTAL TIME: O(N)
-        // TOTAL SPACE: O(1)
-        // `calcDepth` calculates the depth of a node considering atleast the root node distance is initalized
         int calcDepth(const vector<int>& parent, const int node) {
           int dist = 0;
 
@@ -60,9 +82,6 @@ class BinaryLift {
           return dist;
         }
 
-        // TOTAL TIME: O(N)
-        // TOTAL SPACE: O(1)
-        // `calcDepthAll` is responsible for calculating the depth vector considering the depth vector is initialized
         vector<int> calcDepthAll(const vector<int>& parent) {
           int n = parent.size();
 
@@ -74,9 +93,6 @@ class BinaryLift {
           return this->depth;
         }
 
-        // TOTAL TIME: O(N)
-        // TOTAL SPACE: O(N)
-        // `calcDepthAll` is responsible for populating the depth vector
         vector<int> initDepth_calcDepthAll(const vector<int>& parent) {
           this->initDepth(parent);
           this->calcDepthAll(parent);
@@ -85,26 +101,28 @@ class BinaryLift {
         }
     };
 
-    // `depth` is a Depth type member which deals with depth calculations
     Depth depth;
-    // `lifter` is a vector of lists as vectors which deals with binary lift caching
     vector<vector<int>> lifter;
 
-    // TOTAL TIME: O(NlogN) 
-    // TOTAL SPACE: O(NlogN) 
-    // `initLifter` intializes the binary lift cache
     vector<vector<int>> initLifter(const vector<int>& parent) {
+      int i;
+      
+      int m = this->lifter.size();
+      for (m--; m >= 0 ; m--) {
+        this->lifter[m].clear();
+      }
+      this->lifter.clear();
+
       this->depth.initDepth_calcDepthAll(parent);
 
       int n = this->depth.depth.size();
-      
+
       this->lifter.resize(n);
 
       int max = *max_element(this->depth.depth.begin(), this->depth.depth.end());
       int d = 1;
       while (max >>= 1) d++;
 
-      int i;
       for (i = 0; i < n; i++) {
         this->lifter[i].resize(d, -1);
 
@@ -116,9 +134,6 @@ class BinaryLift {
       return this->lifter;
     }
 
-    // TOTAL TIME: O(NlogN) 
-    // TOTAL SPACE: O(NlogN) 
-    // `caclLifter` calculates the binary lift cache considering that lifter is initialized
     vector<vector<int>> caclLifter() {
       int n = this->lifter.size();
       int m = this->lifter[0].size();
@@ -139,9 +154,6 @@ class BinaryLift {
       return this->lifter;
     }
 
-    // TOTAL TIME: O(NlogN) 
-    // TOTAL SPACE: O(NlogN) 
-    // `initLifter_caclLifter` populates the binary lift cache
     vector<vector<int>> initLifter_caclLifter(const vector<int>& parent) {
       this->initLifter(parent);
       this->caclLifter();
@@ -149,9 +161,6 @@ class BinaryLift {
       return this->lifter;
     }
 
-    // TOTAL TIME: O(N) if lifter was empty; O(NlogN) is lifter was not empty;
-    // TOTAL SPACE: O(N)
-    // `initLifter` intializes the binary lift cache wihtout precalculating the max depth
     vector<vector<int>> initLifter_withoutPreCalcDepth(const vector<int>& parent) {
       int i;
       
@@ -174,9 +183,6 @@ class BinaryLift {
       return this->lifter;
     }
 
-    // TOTAL TIME: O(NlogN) 
-    // TOTAL SPACE: O(NlogN) 
-    // `caclLifter_withoutPreCalcDepth` calculates the binary lift cache wihtout precalculating the max depth
     vector<vector<int>> caclLifter_withoutPreCalcDepth() {
       int n = this->lifter.size();
 
@@ -204,9 +210,6 @@ class BinaryLift {
       return this->lifter;
     }
 
-    // TOTAL TIME: O(NlogN) 
-    // TOTAL SPACE: O(NlogN) 
-    // `initLifter_caclLifter` populates the binary lift cache wihtout precalculating the max depth
     vector<vector<int>> initLifter_caclLifter_withoutPreCalcDepth(const vector<int>& parent) {
       this->initLifter_withoutPreCalcDepth(parent);
       this->caclLifter_withoutPreCalcDepth();

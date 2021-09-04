@@ -3,20 +3,38 @@
 
 using namespace std;
 
-// `Depth` is a class to deal with node's depth calculation in a given tree
-// `parent` is a tree as vector where each index is a node and it's value is it's parent
-// root node has itself as it's parent
+/**
+ * `Depth` is a class to deal with node's depth calculation in a given tree
+ *
+ * `depth` is a vector where each index is a node and it's value is it's distance from the root of tree in `parent`
+ *
+ * `parent` is a tree as vector where each index is a node and it's value is it's parent
+ * root node has itself as it's parent
+ *
+ * `initDepth` intializes the depth vector
+ * TOTAL TIME: O(N)
+ * TOTAL SPACE: O(N)
+ *
+ * `calcDepth` calculates the depth of a node considering atleast the root node distance is initalized
+ * TOTAL TIME: O(N)
+ * TOTAL SPACE: O(1)
+ *
+ * `calcDepthAll` is responsible for calculating the depth vector considering the depth vector is initialized
+ * TOTAL TIME: O(N)
+ * TOTAL SPACE: O(1)
+ *
+ * `calcDepthAll` is responsible for populating the depth vector
+ * TOTAL TIME: O(N)
+ * TOTAL SPACE: O(N)
+ */
 class Depth {
   public:
-    // `depth` is a vector where each index is a node and it's value is it's distance from the root of tree in `parent`
     vector<int> depth;
 
-    // TOTAL TIME: O(N)
-    // TOTAL SPACE: O(N)
-    // `initDepth` intializes the depth vector
     vector<int> initDepth(const vector<int>& parent) {
       int n = parent.size();
 
+      this->depth.clear();
       this->depth.resize(n);
 
       int i;
@@ -27,9 +45,6 @@ class Depth {
       return this->depth;
     }
 
-    // TOTAL TIME: O(N)
-    // TOTAL SPACE: O(1)
-    // `calcDepth` calculates the depth of a node considering atleast the root node distance is initalized
     int calcDepth(const vector<int>& parent, const int node) {
       int dist = 0;
 
@@ -54,9 +69,6 @@ class Depth {
       return dist;
     }
 
-    // TOTAL TIME: O(N)
-    // TOTAL SPACE: O(1)
-    // `calcDepthAll` is responsible for calculating the depth vector considering the depth vector is initialized
     vector<int> calcDepthAll(const vector<int>& parent) {
       int n = parent.size();
 
@@ -68,9 +80,6 @@ class Depth {
       return this->depth;
     }
 
-    // TOTAL TIME: O(N)
-    // TOTAL SPACE: O(N)
-    // `calcDepthAll` is responsible for populating the depth vector
     vector<int> initDepth_calcDepthAll(const vector<int>& parent) {
       this->initDepth(parent);
       this->calcDepthAll(parent);

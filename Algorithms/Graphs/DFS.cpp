@@ -5,12 +5,12 @@ using namespace std;
 
 // Time: O(V + E); Space: O(V);
 void dfs_traversal(
-  const unordered_map<int, vector<int>>& graph,
+  const vector<int, vector<int>>& graph,
   const int& root,
   const bool& _debug = true
 ) {
   auto dfs = [](
-    const unordered_map<int, vector<int>>& graph,
+    const vector<int, vector<int>>& graph,
     unordered_set<int>& visited,
     const int& root,
     const bool& _debug,
@@ -54,7 +54,7 @@ void dfs_traversal(
 }
 
 int main() {
-  unordered_map<int, vector<int>> graph = inp_graph_unweighted("graph");
+  auto graph = inp_graph_unweighted("graph");
 
   dfs_traversal(graph, 0);
   

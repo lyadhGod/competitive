@@ -99,8 +99,8 @@ int pow_integer_mod(
 }
 
 int main() {
-  int num = inp_int("num", -10, 10);
-  unsigned int exp_int = inp_int("exp", 0, 10);
+  int num = inp_int("num", true, -10, 10);
+  unsigned int exp_int = inp_int("exp", true, 0, 10);
 
   pow_integer(num, exp_int);
   pow_integer_mod(num, exp_int, 1000000007);
