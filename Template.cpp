@@ -5,9 +5,9 @@
 #define FOK(i, n, k) for(i = 0; i < n; i += k)
 #define FOAK(i, a, n, k) for(i = a; i < n; i += k)
 #define RFO(i, n) for(i = n - 1; i >= 0; i--)
-#define RFOA(i, n, a) for(i = n - 1; i >= a; i--)
+#define RFOA(i, a, n) for(i = n - 1; i >= a; i--)
 #define RFOK(i, n, k) for(i = n - 1; i >= 0; i -= k)
-#define RFOAK(i, n, a, k) for(i = n - 1; i >= a; i -= k)
+#define RFOAK(i, a, n, k) for(i = n - 1; i >= a; i -= k)
 #define IT(itr, x) for(itr = x.begin(); itr != x.end(); itr++)
 #define ITR(itr, g, h) for(itr = g; itr != h; itr++)
 #define RIT(itr, x) for(itr = --x.end(); itr != --x.begin(); itr--)
@@ -48,6 +48,8 @@
 #define IMCMP(k, v, cmp) map<k, v, cmp>::iterator
 #define IMM(k, v) multimap<k, v>::iterator
 #define IMMCMP(k, v, cmp) multimap<k, v, cmp>::iterator
+#define IUS(t) unordered_set<t>::iterator
+#define IUSCMP(t, cmp) unordered_set<t, cmp>::iterator
 #define IUMS(t) unordered_multiset<t>::iterator
 #define IUMSCMP(t, cmp) unordered_multiset<t, cmp>::iterator
 #define IUM(k, v) unordered_map<k, v>::iterator
