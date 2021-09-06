@@ -66,8 +66,122 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+// Time: O(1); Space: O(1);
+long long mod_add(
+  const long long& a,
+  const long long& b,
+  const long long& mod
+) {
+  long long x = a;
+  if (x < 0) {
+    x += mod;
+  } else if (x >= mod) {
+    x %= mod;
+  }
+
+  long long y = b;
+  if (y < 0) {
+    y += mod;
+  } else if (y >= mod) {
+    y %= mod;
+  }
+
+  long long res = x + y;
+  if (res < 0) {
+    res += mod;
+  } else if (res >= mod) {
+    res %= mod;
+  }
+
+  return res;
+}
+
+// Time: O(1); Space: O(1);
+long long mod_sub(
+  const long long& a,
+  const long long& b,
+  const long long& mod
+) {
+  long long x = a;
+  if (x < 0) {
+    x += mod;
+  } else if (x >= mod) {
+    x %= mod;
+  }
+
+  long long y = b;
+  if (y < 0) {
+    y += mod;
+  } else if (y >= mod) {
+    y %= mod;
+  }
+
+  long long res = x - y;
+  if (res < 0) {
+    res += mod;
+  } else if (res >= mod) {
+    res %= mod;
+  }
+
+  return res;
+}
+
+// Time: O(1); Space: O(1);
+long long mod_mul(
+  const long long& a,
+  const long long& b,
+  const long long& mod
+) {
+  long long x = a;
+  if (x < 0) {
+    x += mod;
+  } else if (x >= mod) {
+    x %= mod;
+  }
+
+  long long y = b;
+  if (y < 0) {
+    y += mod;
+  } else if (y >= mod) {
+    y %= mod;
+  }
+
+  long long res = x * y;
+  if (res < 0) {
+    res += mod;
+  } else if (res >= mod) {
+    res %= mod;
+  }
+
+  return res;
+}
+
+long long solve(const int& o, const int& n, const int& k, const int& w, const V(long long)& l, const V(long long)& h) {
+    long long _mod = 1000000007LL;
+
+    long long t;
+
+    long long ans;
+
+    ans = h[0] + h[0] + w + w;
+
+    long long ov;
+
+    int i;
+    FOA(i, 1, n) {
+        ov = l[i - 1] + w - l[i];
+
+        if (ov < 0) {
+            t = h[i] + h[i] + w + w;
+        } else {
+            t = ans - (ov + ov + h[i - 1]);
+            t += abs(h[i] - h[i - 1]) + w + w + h[i];
+        }
+
+        ans = mod_mul(ans, t, _mod);
+    }
+
+    return ans;
 }
 
 int main() {
@@ -78,11 +192,40 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    int n, k, w;
+    V(long long) l, h;
+    long long al, bl, cl, dl;
+    long long ah, bh, ch, dh;
 
-    int o;
+    long long ans;
+
+    int o, i;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> n >> k >> w;
+
+        l.resize(n);
+        FO(i, k) {
+            cin >> l[i];
+        }
+
+        cin >> al >> bl >> cl >> dl;
+        FOA(i, k, n) {
+            l[i] = (((al * l[i - 2]) + (bl * l[i - 1]) + cl) % dl) + 1LL;
+        }
+
+        h.resize(n);
+        FO(i, k) {
+            cin >> h[i];
+        }
+
+        cin >> ah >> bh >> ch >> dh;
+        FOA(i, k, n) {
+            h[i] = (((ah * h[i - 2]) + (bh * h[i - 1]) + ch) % dh) + 1LL;
+        }
+
+        ans = solve(o, n, k, w, l, h);
+
+        cout << "Case #" << o << ": " << ans << "\n";
     }
 
     return 0;
