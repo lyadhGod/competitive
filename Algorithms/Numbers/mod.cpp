@@ -7,7 +7,7 @@ using namespace std;
 int mod_add(
   const int& a,
   const int& b,
-  const unsigned int& mod,
+  const int& mod = 1000000007,
   const bool& _debug = true
 ) {
   int x = a;
@@ -45,7 +45,7 @@ int mod_add(
 int mod_sub(
   const int& a,
   const int& b,
-  const unsigned int& mod,
+  const int& mod = 1000000007,
   const bool& _debug = true
 ) {
   int x = a;
@@ -83,7 +83,7 @@ int mod_sub(
 int mod_mul(
   const int& a,
   const int& b,
-  const unsigned int& mod,
+  const int& mod = 1000000007,
   const bool& _debug = true
 ) {
   int x = a;
