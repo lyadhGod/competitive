@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "../../Helpers/helpers.h"
+#include "../../helpers/helpers.h"
 
 using namespace std;
 
@@ -54,7 +54,7 @@ vector<string> split(
 }
 
 int main() {
-  string s = inp_string(s);
+  string s = inp_string("s");
 
   split(s, " ");
 
