@@ -66,69 +66,26 @@
 
 using namespace std;
 
-long solve(const int& o, const int& n, const string& s) {
-    int i, j;
-
-    vector<int> l(n), r(n);
-
-    j = -1;
-    FO(i, n) {
-        if (s[i] == '1') {
-            l[i] = 0;
-            j = i;
-        } else {
-            if (j == -1) {
-                l[i] = INT_MAX;
-            } else {
-                l[i] = i - j;
-            }
-        }
-    }
-
-    j = -1;
-    RFO(i, n) {
-        if (s[i] == '1') {
-            r[i] = 0;
-            j = i;
-        } else {
-            if (j == -1) {
-                r[i] = INT_MAX;
-            } else {
-                r[i] = j - i;
-            }
-        }
-    }
-
-    long res = 0L;
-    FO(i, n) {
-        res += min(l[i], r[i]);
-    }
-
-    return res;
+int solve(const int& o) {
+  
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
 
-    int t;
-    cin >> t;
+  int t;
+  cin >> t;
 
-    int n;
-    string s;
+  int ans;
 
-    long ans;
+  int o;
+  FOA(o, 1, t + 1) {
+    ans = solve(o);
 
-    int o;
-    FOA(o, 1, t + 1) {
-        cin >> n;
-        cin >> s;
+    cout << "Case #" << o << ": " << ans << "\n";
+  }
 
-        ans = solve(o, n, s);
-
-        cout << "Case #" << o << ": " << ans << "\n";
-    }
-
-    return 0;
+  return 0;
 }

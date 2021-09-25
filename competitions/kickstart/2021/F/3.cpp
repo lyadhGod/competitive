@@ -66,8 +66,64 @@
 
 using namespace std;
 
-int solve(const int& o) {
-    
+double area(const P(int, int)& p1, const P(int, int)& p2, const P(int, int)& p3) {
+    int a1 = p1.first * (p2.second - p3.second);
+    int a2 = p2.first * (p1.second - p3.second);
+    int a3 = p3.first * (p1.second - p2.second);
+
+    return abs((double) (a1 + a2 + a3) / 2.0);
+}
+
+double dist(const P(int, int)& p1, const P(int, int)& p2) {
+    int a1 = PF(p1) - PF(p2);
+    a1 *= a1;
+
+    int a2 = PS(p1) - PS(p2);
+    a2 *= a2;
+
+    return sqrt((double) (a1 + a2));
+}
+
+string solve(const int& o, const int& n, V(P(int, int))& w, const P(int, int)& b) {
+    if (n < 3) {
+        return "IMPOSSIBLE";
+    }
+
+    int i, j;
+
+    MM(double, int) d;
+
+    double k;
+    FO(i, n) {
+        k = dist(w[i], b);
+        d.emplace(k, i);
+    }
+
+    auto p1 = d.begin();
+    auto p2 = ++d.begin();
+    auto p3 = ++(++d.begin());
+
+    double z, z1, z2, z3, zz;
+    for (; p3 != d.end(); p1 = p2, p2 = p3, p3++) {
+        z = area(w[PPS(p1)], w[PPS(p2)], w[PPS(p3)]);
+        
+        z1 = area(w[PPS(p1)], w[PPS(p2)], b);
+        z2 = area(w[PPS(p2)], w[PPS(p3)], b);
+        z3 = area(w[PPS(p1)], w[PPS(p3)], b);
+        zz = z1 + z2 + z3;
+
+        if (abs(z - zz) < 0.000001) {
+            break;
+        }
+    }
+
+    if (p3 == d.end()) {
+        return "IMPOSSIBLE";
+    }
+
+    k = dist(w[PPS(p1)], w[PPS(p2)]) + dist(w[PPS(p2)], w[PPS(p3)]) + dist(w[PPS(p1)], w[PPS(p3)]);
+
+    return to_string(k);
 }
 
 int main() {
@@ -78,11 +134,26 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    int n;
+    V(P(int, int)) w;
+    P(int, int) b;
 
-    int o;
+    string ans;
+
+    int o, i, e, f;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> n;
+
+        w.resize(n);
+        FO(i, n) {
+            cin >> e >> f;
+            w[i] = make_pair(e, f);
+        }
+
+        cin >> e >> f;
+        b = make_pair(e, f);
+
+        ans = solve(o, n, w ,b);
 
         cout << "Case #" << o << ": " << ans << "\n";
     }

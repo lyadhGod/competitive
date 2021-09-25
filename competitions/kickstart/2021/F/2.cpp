@@ -24,7 +24,7 @@
 #define S(t) set<t>
 #define SCMP(t) set<t, cmp>
 #define MS(t) multiset<t>
-#define MSCMP(t) multiset<t, cmp>
+#define MSCMP(t, cmp) multiset<t, cmp>
 #define M(k, v) map<k, v>
 #define MCMP(k, v, cmp) map<k, v, cmp>
 #define MM(k, v) multimap<k, v>
@@ -61,13 +61,53 @@
 #define DQ(t) deque<t>
 #define PQ(t) priority_queue<t>
 #define PQCMP(t, cmp) priority_queue<t, vector<t>, cmp>
-#define GT(t) greater<t>()
-#define LT(t) less<t>()
+#define GT(t) greater<t>
+#define LT(t) less<t>
 
 using namespace std;
 
-int solve(const int& o) {
-    
+long solve(
+    const int& o,
+    const int& d,
+    const int& n,
+    const int& k,
+    const V(int)& h,
+    const V(int)& s,
+    const V(int)& e
+) {
+    int i, j;
+
+    long res = INT_MIN;
+    long sum;
+
+    MM(int, int) m;
+    FO(i, n) {
+        m.emplace(e[i], i);
+    }
+
+    IMM(int, int) x, y;
+    int v;
+    FO(j, d) {
+        sum = 0L;
+
+        x = m.upper_bound(j);
+        for (y = --m.end(); y != x; y--) {
+            i = PPS(y);
+            if (s[i] <= j) {
+                sum += h[i];
+            }
+        }
+        i = PPS(y);
+        if (s[i] <= j) {
+            sum += h[i];
+        }
+
+        if (sum > res) {
+            res = sum;
+        }
+    }
+
+    return res;
 }
 
 int main() {
@@ -78,11 +118,29 @@ int main() {
     int t;
     cin >> t;
 
-    int ans;
+    int d, n, k;
+    V(int) h, s, e;
 
-    int o;
+    long ans;
+
+    int o, i;
     FOA(o, 1, t + 1) {
-        ans = solve(o);
+        cin >> d >> n >> k;
+
+        h.resize(n);
+        s.resize(n);
+        e.resize(n);
+        FO(i, n) {
+            cin >> h[i] >> s[i] >> e[i];
+        }
+        FO(i, n) {
+            s[i]--;
+        }
+        FO(i, n) {
+            e[i]--;
+        }
+        
+        ans = solve(o, d, n, k, h, s, e);
 
         cout << "Case #" << o << ": " << ans << "\n";
     }
