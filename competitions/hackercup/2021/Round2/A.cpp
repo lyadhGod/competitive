@@ -66,8 +66,51 @@
 
 using namespace std;
 
-int solve(const int& o) {
-  
+int solve(const int& o, const int& n, const int& m, const V(int)& s, const V(V(int))& p) {
+  int i, j;
+
+  V(bool) v(m, false);
+
+  M(int, int) w;
+  FO(i, m) {
+    w[s[i]] = 0;
+  }
+  FO(i, m) {
+    w[s[i]]++;
+  }
+
+  int c = 0;
+  FO(i, n) {
+    FO(j, m) {
+      auto k = w.find(p[i][j]);
+      if (k != w.end()) {
+        if (k->second == 1) {
+          if (v[j] == false) {
+            v[j] == true;
+          } else {
+            c++;
+          }
+        }
+        w[p[i][j]]--;
+      } else {
+        if (v[j] == false) {
+          v[j] == true;
+        } else {
+          c++;
+        }
+      }
+    }
+
+    w.clear();
+    FO(j, m) {
+      w[p[i][j]] = 0;
+    }
+    FO(j, m) {
+      w[p[i][j]]++;
+    }
+  }
+
+  return c;
 }
 
 int main() {
@@ -78,11 +121,30 @@ int main() {
   int t;
   cin >> t;
 
+  int n, m;
+  V(int) s;
+  V(V(int)) p;
+
   int ans;
 
-  int o;
+  int o, i, j;
   FOA(o, 1, t + 1) {
-    ans = solve(o);
+    cin >> n >> m;
+
+    s.resize(n);
+    FO(i, m) {
+      cin >> s[i];
+    }
+
+    p.resize(n);
+    FO(i, n) {
+      p.resize(m);
+      FO(j, m) {
+        cin >> p[i][j];
+      }
+    }
+
+    ans = solve(o, n, m, s, p);
 
     cout << "Case #" << o << ": " << ans << "\n";
   }
