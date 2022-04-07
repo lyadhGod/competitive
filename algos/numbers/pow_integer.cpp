@@ -6,8 +6,7 @@ using namespace std;
 // Time: O(logN); Space: O(1);
 int pow_integer(
   const int& num,
-  const unsigned int& exp,
-  const bool& _debug = true
+  const unsigned int& exp
 ) {
   unsigned int a = exp;
   int n = num;
@@ -28,11 +27,6 @@ int pow_integer(
     res *= -1;
   }
 
-  if (_debug) {
-    out_int(res, "pow_integer()");
-    cout << "\n";
-  }
-
   return res;
 }
 
@@ -40,8 +34,7 @@ int pow_integer(
 int pow_integer_mod(
   const int& num,
   const unsigned int& exp,
-  const unsigned int& mod,
-  const bool& _debug = true
+  const unsigned int& mod
 ) {
   unsigned int a = exp;
   int n = num;
@@ -49,7 +42,7 @@ int pow_integer_mod(
     n *= -1;
   }
 
-  // FROM /Numbers/mod.cpp#mod_mul()
+  // FROM /algos/numbers/mod.cpp#mod_mul()
   auto mod_mul = [&](
     const int& a,
     const int& b,
@@ -75,6 +68,8 @@ int pow_integer_mod(
     } else if (res >= mod) {
       res %= mod;
     }
+
+    return res;
   };
 
   int res = 1;
@@ -90,20 +85,20 @@ int pow_integer_mod(
     res *= -1;
   }
 
-  if (_debug) {
-    out_int(res, "pow_integer_mod()");
-    cout << "\n";
-  }
-
   return res;
 }
 
 int main() {
+  int res;
+
   int num = inp_int("num", true, -10, 10);
   unsigned int exp_int = inp_int("exp", true, 0, 10);
 
-  pow_integer(num, exp_int);
-  pow_integer_mod(num, exp_int, 1000000007);
+  res = pow_integer(num, exp_int);
+  out_int(res, "pow_integer()");
+
+  res = pow_integer_mod(num, exp_int, 1000000007);
+  out_int(res, "pow_integer_mod()");
 
   return 0;
 }

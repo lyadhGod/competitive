@@ -7,8 +7,7 @@ using namespace std;
 int mod_add(
   const int& a,
   const int& b,
-  const int& mod = 1000000007,
-  const bool& _debug = true
+  const int& mod = 1000000007
 ) {
   int x = a;
   if (x < 0) {
@@ -31,13 +30,6 @@ int mod_add(
     res %= mod;
   }
 
-  if (_debug) {
-    out_int(x, "mod_add()[ x ]");
-    out_int(y, "mod_add()[ y ]");
-    out_int(res, "mod_add()");
-    cout << "\n";
-  }
-
   return res;
 }
 
@@ -45,8 +37,7 @@ int mod_add(
 int mod_sub(
   const int& a,
   const int& b,
-  const int& mod = 1000000007,
-  const bool& _debug = true
+  const int& mod = 1000000007
 ) {
   int x = a;
   if (x < 0) {
@@ -69,13 +60,6 @@ int mod_sub(
     res %= mod;
   }
 
-  if (_debug) {
-    out_int(x, "mod_add()[ x ]");
-    out_int(y, "mod_add()[ y ]");
-    out_int(res, "mod_sub()");
-    cout << "\n";
-  }
-
   return res;
 }
 
@@ -83,8 +67,7 @@ int mod_sub(
 int mod_mul(
   const int& a,
   const int& b,
-  const int& mod = 1000000007,
-  const bool& _debug = true
+  const int& mod = 1000000007
 ) {
   int x = a;
   if (x < 0) {
@@ -107,24 +90,24 @@ int mod_mul(
     res %= mod;
   }
 
-  if (_debug) {
-    out_int(x, "mod_add()[ x ]");
-    out_int(y, "mod_add()[ y ]");
-    out_int(res, "mod_mul()");
-    cout << "\n";
-  }
-
   return res;
 }
 
 int main() {
+  int res;
+
   int a = inp_int("a", true, -10, 10);
   int b = inp_int("b", true, -10, 10);
   unsigned int mod = 1000000007;
 
-  mod_add(a, b, mod);
-  mod_sub(a, b, mod);
-  mod_mul(a, b, mod);
+  res = mod_add(a, b, mod);
+  out_int(res, "mod_add()");
+
+  res = mod_sub(a, b, mod);
+  out_int(res, "mod_sub()");
+
+  res = mod_mul(a, b, mod);
+  out_int(res, "mod_mul()");
 
   return 0;
 }
