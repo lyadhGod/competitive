@@ -3,11 +3,10 @@
 
 using namespace std;
 
-// Time: O(N^3logN); Space: O(1);
+// Time: O(N^3logN); Space: O(N^2);
 vector<vector<int>> pow_mat(
   const vector<vector<int>>& mat,
-  const unsigned int& exp,
-  const bool& _debug = true
+  const unsigned int& exp
 ) {
   vector<vector<int>> res;
 
@@ -15,10 +14,12 @@ vector<vector<int>> pow_mat(
   if (r <= 0) {
     return res;
   }
+  
   int c = mat[0].size();
   if (c <= 0) {
     return res;
   }
+
   if (r != c) {
     return res;
   }
@@ -61,7 +62,7 @@ vector<vector<int>> pow_mat(
 
   copy(mat, n);
 
-  // FROM /Matrices/mul.cpp#mul()
+  // FROM /algos/matrices/mul.cpp#mul()
   auto mul = [](
     const vector<vector<int>>& a,
     const vector<vector<int>>& b,
@@ -96,19 +97,17 @@ vector<vector<int>> pow_mat(
     a >>= 1;
   }
 
-  if (_debug) {
-    out_matrix_int(res, "pow_mat()");
-    cout << "\n";
-  }
-
   return res;
 }
 
 int main() {
+  vector<vector<int>> res;
+
   vector<vector<int>> mat = inp_matrix_int("mat", true, 2, 2, -10, 10);
   unsigned int exp_int = inp_int("exp", true, 0, 4);
 
-  pow_mat(mat, exp_int);
+  res = pow_mat(mat, exp_int);
+  out_matrix_int(res, "pow_mat()");
 
   return 0;
 }

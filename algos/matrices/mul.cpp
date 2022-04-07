@@ -6,8 +6,7 @@ using namespace std;
 // Time: O(MNP); Space: O(MP);
 vector<vector<int>> mul(
   const vector<vector<int>>& a,
-  const vector<vector<int>>& b,
-  const bool& _debug = true
+  const vector<vector<int>>& b
 ) {
   vector<vector<int>> mat;
 
@@ -45,19 +44,17 @@ vector<vector<int>> mul(
     }
   }
 
-  if (_debug) {
-    out_matrix_int(mat, "mul()");
-    cout << "\n";
-  }
-
   return mat;
 }
 
 int main() {
+  vector<vector<int>> res;
+
   vector<vector<int>> a = inp_matrix_int("a", true, 2, 3, -10, 10);
   vector<vector<int>> b = inp_matrix_int("b", true, 3, 2, -10, 10);
 
-  mul(a, b);
+  res = mul(a, b);
+  out_matrix_int(res, "mul()");
 
   return 0;
 }
